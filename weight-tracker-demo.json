@@ -1,0 +1,1994 @@
+{
+  "entries": [
+    {
+      "date": "2026-02-01",
+      "weight": 200.0,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-02",
+      "weight": 200.6,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-03",
+      "weight": 200.5,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-04",
+      "weight": 201.2,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-05",
+      "weight": 202.1,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-06",
+      "weight": 199.9,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-07",
+      "weight": 199.5,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-08",
+      "weight": 199.2,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-09",
+      "weight": 198.7,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "garden salad",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": "waist 36"
+    },
+    {
+      "date": "2026-02-10",
+      "weight": 198.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "soda",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "bratwurst",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "apple",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-11",
+      "weight": 197.8,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "garden salad",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "apple",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-12",
+      "weight": 197.6,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "apple",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-13",
+      "weight": 197.0,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "apple",
+          "qty": 1
+        },
+        {
+          "name": "candy bar",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "fish tacos",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-14",
+      "weight": 198.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "cheeseburger",
+          "qty": 1
+        },
+        {
+          "name": "chicken tenders",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        }
+      ],
+      "notes": "cheeseburger and chicken tenders from Five Guys"
+    },
+    {
+      "date": "2026-02-15",
+      "weight": 198.8,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "apple",
+          "qty": 2
+        },
+        {
+          "name": "diner special",
+          "qty": 1
+        },
+        {
+          "name": "pie slice",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-16",
+      "weight": 198.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "grilled chicken sandwich",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "apple",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-17",
+      "weight": 198.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "green tea latte",
+          "qty": 1
+        },
+        {
+          "name": "soda",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "honey roasted peanuts",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-18",
+      "weight": 200.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-19",
+      "weight": 198.3,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "apple",
+          "qty": 2
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": "1 apple and 1 protein shake were late at night"
+    },
+    {
+      "date": "2026-02-20",
+      "weight": 198.1,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-21",
+      "weight": 199.1,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-22",
+      "weight": 199.9,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-23",
+      "weight": 198.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "apple",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-24",
+      "weight": 196.3,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "sourdough bread",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-25",
+      "weight": 196.8,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "garden salad",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        },
+        {
+          "name": "honey roasted peanuts",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-26",
+      "weight": 197.3,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "breakfast burrito",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-27",
+      "weight": 196.3,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 2
+        },
+        {
+          "name": "shrimp cakes",
+          "qty": 2
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-02-28",
+      "weight": 198.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "fried chicken combo",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "sourdough bread",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-01",
+      "weight": 200.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "sourdough bread",
+          "qty": 2
+        },
+        {
+          "name": "fried chicken combo",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-02",
+      "weight": 199.0,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "peanut butter cups",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-03",
+      "weight": 197.9,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "candy bar",
+          "qty": 1
+        },
+        {
+          "name": "bratwurst",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-04",
+      "weight": 199.9,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-05",
+      "weight": 197.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-06",
+      "weight": 196.7,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "chocolate bites",
+          "qty": 1
+        },
+        {
+          "name": "bratwurst",
+          "qty": 1
+        },
+        {
+          "name": "shrimp cakes",
+          "qty": 2
+        },
+        {
+          "name": "pasta primavera",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-07",
+      "weight": 197.7,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "five guys",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "sourdough bread",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-08",
+      "weight": 198.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "peanut butter cup",
+          "qty": 1
+        },
+        {
+          "name": "chocolate pretzels",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-09",
+      "weight": 197.7,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "tuna salad",
+          "qty": 1
+        },
+        {
+          "name": "soda",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-10",
+      "weight": 197.3,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-11",
+      "weight": 196.1,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "garden salad",
+          "qty": 1
+        },
+        {
+          "name": "chocolate milk",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-12",
+      "weight": 196.1,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "birthday cake",
+          "qty": 1
+        },
+        {
+          "name": "honey roasted peanuts",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-13",
+      "weight": 197.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "stuffed peppers",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "roasted potatoes",
+          "qty": 3
+        },
+        {
+          "name": "sour cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-14",
+      "weight": 197.5,
+      "foods": [
+        {
+          "name": "breakfast sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "home fries",
+          "qty": 1
+        },
+        {
+          "name": "roasted potatoes",
+          "qty": 4
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-15",
+      "weight": 196.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "cheeseburger",
+          "qty": 1
+        },
+        {
+          "name": "chicken tenders",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 4
+        }
+      ],
+      "notes": "cheeseburger and chicken tenders from Five Guys"
+    },
+    {
+      "date": "2026-03-16",
+      "weight": 198.1,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "garden salad",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-17",
+      "weight": 195.9,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-18",
+      "weight": 196.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "honey roasted peanuts",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-19",
+      "weight": 198.3,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "cocktails",
+          "qty": 5
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-20",
+      "weight": 197.1,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "chocolate bites",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-21",
+      "weight": 197.3,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "fried chicken strips",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-22",
+      "weight": 200.6,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "pasta marinara",
+          "qty": 1
+        },
+        {
+          "name": "fried chicken strips",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-23",
+      "weight": 197.4,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-24",
+      "weight": 196.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "chocolate pretzels",
+          "qty": 1
+        },
+        {
+          "name": "red hots",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-25",
+      "weight": 198.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "cookies",
+          "qty": 6
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-26",
+      "weight": 199.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-27",
+      "weight": 196.9,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "cocktails",
+          "qty": 7
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-28",
+      "weight": 196.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "tuna salad",
+          "qty": 1
+        },
+        {
+          "name": "soda",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-29",
+      "weight": 196.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "sourdough bread",
+          "qty": 2
+        },
+        {
+          "name": "mini burgers",
+          "qty": 3
+        },
+        {
+          "name": "sweet potato fries",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-30",
+      "weight": 197.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        },
+        {
+          "name": "honey roasted peanuts",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-03-31",
+      "weight": 197.7,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "soda",
+          "qty": 1
+        },
+        {
+          "name": "chocolate bites",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-01",
+      "weight": 197.0,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-02",
+      "weight": 195.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "cocktails",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-03",
+      "weight": 195.5,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-04",
+      "weight": 197.4,
+      "foods": [
+        {
+          "name": "fried chicken",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-05",
+      "weight": 198.8,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "five guys",
+          "qty": 1
+        },
+        {
+          "name": "sweet potato fries",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-06",
+      "weight": 199.6,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "pasta marinara",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-07",
+      "weight": 196.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "oatmeal cookie",
+          "qty": 1
+        },
+        {
+          "name": "chocolate bites",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        },
+        {
+          "name": "pasta marinara",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-08",
+      "weight": 196.2,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "sodas",
+          "qty": 4
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-09",
+      "weight": 196.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-10",
+      "weight": 199.1,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "honey roasted peanuts",
+          "qty": 1
+        },
+        {
+          "name": "bratwurst",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-11",
+      "weight": 199.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "fried chicken",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 4
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-12",
+      "weight": 201.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "diner special",
+          "qty": 1
+        },
+        {
+          "name": "pie slice",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-13",
+      "weight": 197.7,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "tuna salad",
+          "qty": 1
+        },
+        {
+          "name": "soda",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-14",
+      "weight": 197.6,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "tuna salad",
+          "qty": 1
+        },
+        {
+          "name": "turkey wraps",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-15",
+      "weight": 197.4,
+      "foods": [],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-16",
+      "weight": 197.6,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        },
+        {
+          "name": "pasta marinara",
+          "qty": 1
+        },
+        {
+          "name": "frozen entree",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-17",
+      "weight": 198.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "chocolate pretzels",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "ice cream",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-18",
+      "weight": 198.8,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "five guys",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        },
+        {
+          "name": "snack bag",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-19",
+      "weight": 196.8,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "diner special",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-20",
+      "weight": 194.5,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "tuna wraps",
+          "qty": 2
+        },
+        {
+          "name": "protein shake",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-21",
+      "weight": 194.4,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "corner diner",
+          "qty": 1
+        },
+        {
+          "name": "pie slice",
+          "qty": 1
+        },
+        {
+          "name": "sodas",
+          "qty": 5
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-22",
+      "weight": 194.0,
+      "foods": [
+        {
+          "name": "oatmeal bowl",
+          "qty": 1
+        },
+        {
+          "name": "diner special",
+          "qty": 1
+        },
+        {
+          "name": "pie slice",
+          "qty": 1
+        },
+        {
+          "name": "tortilla chips",
+          "qty": 1
+        },
+        {
+          "name": "protein shake",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-04-23",
+      "weight": 195.1,
+      "foods": [],
+      "notes": ""
+    }
+  ],
+  "goal": 173.3,
+  "doctorVisits": [
+    {
+      "date": "2017-03-21",
+      "doctor": "Martinez",
+      "officeWeight": 225.2,
+      "homeWeight": 221.0,
+      "notes": ""
+    },
+    {
+      "date": "2021-03-23",
+      "doctor": "Martinez",
+      "officeWeight": 197.2,
+      "homeWeight": 195.3,
+      "notes": ""
+    },
+    {
+      "date": "2021-05-24",
+      "doctor": "Patel",
+      "officeWeight": 193.1,
+      "homeWeight": 189.6,
+      "notes": ""
+    },
+    {
+      "date": "2022-05-06",
+      "doctor": "Patel",
+      "officeWeight": 189.4,
+      "homeWeight": 185.9,
+      "notes": ""
+    },
+    {
+      "date": "2022-07-13",
+      "doctor": "Patel",
+      "officeWeight": 190.5,
+      "homeWeight": 185.4,
+      "notes": ""
+    },
+    {
+      "date": "2022-12-29",
+      "doctor": "Patel",
+      "officeWeight": 192.8,
+      "homeWeight": 188.7,
+      "notes": ""
+    },
+    {
+      "date": "2023-11-08",
+      "doctor": "Patel",
+      "officeWeight": 200.7,
+      "homeWeight": 197.8,
+      "notes": ""
+    },
+    {
+      "date": "2023-12-13",
+      "doctor": "Martinez",
+      "officeWeight": 204.2,
+      "homeWeight": 200.7,
+      "notes": ""
+    },
+    {
+      "date": "2024-01-17",
+      "doctor": "Martinez",
+      "officeWeight": 207.9,
+      "homeWeight": 201.5,
+      "notes": ""
+    },
+    {
+      "date": "2025-05-22",
+      "doctor": "Patel",
+      "officeWeight": 200.9,
+      "homeWeight": 198.8,
+      "notes": ""
+    },
+    {
+      "date": "2025-09-25",
+      "doctor": "Martinez",
+      "officeWeight": 203.7,
+      "homeWeight": 199.0,
+      "notes": ""
+    },
+    {
+      "date": "2025-12-24",
+      "doctor": "Patel",
+      "officeWeight": 200.9,
+      "homeWeight": 197.1,
+      "notes": ""
+    }
+  ],
+  "yearRecords": [
+    {
+      "year": "2003",
+      "low": 227.2,
+      "high": 227.2,
+      "notes": ""
+    },
+    {
+      "year": "2006",
+      "low": 205.6,
+      "high": 205.6,
+      "notes": ""
+    },
+    {
+      "year": "2013",
+      "low": 178.7,
+      "high": 178.7,
+      "notes": ""
+    },
+    {
+      "year": "2014",
+      "low": 211.8,
+      "high": 211.8,
+      "notes": ""
+    },
+    {
+      "year": "2015",
+      "low": 196.4,
+      "high": 200.2,
+      "notes": ""
+    },
+    {
+      "year": "2016",
+      "low": 200.2,
+      "high": 200.2,
+      "notes": ""
+    },
+    {
+      "year": "2017",
+      "low": 200.2,
+      "high": 221.0,
+      "notes": ""
+    },
+    {
+      "year": "2018",
+      "low": 196.4,
+      "high": 200.2,
+      "notes": ""
+    },
+    {
+      "year": "2019",
+      "low": 192.5,
+      "high": 200.2,
+      "notes": ""
+    },
+    {
+      "year": "2020",
+      "low": 190.2,
+      "high": 206.4,
+      "notes": ""
+    },
+    {
+      "year": "2021",
+      "low": 187.1,
+      "high": 205.6,
+      "notes": ""
+    },
+    {
+      "year": "2022",
+      "low": 182.5,
+      "high": 197.2,
+      "notes": ""
+    },
+    {
+      "year": "2023",
+      "low": 185.6,
+      "high": 205.6,
+      "notes": ""
+    },
+    {
+      "year": "2024",
+      "low": 194.8,
+      "high": 207.2,
+      "notes": ""
+    },
+    {
+      "year": "2025",
+      "low": 194.8,
+      "high": 207.2,
+      "notes": ""
+    },
+    {
+      "year": "2026",
+      "low": 194.0,
+      "high": 202.1,
+      "notes": ""
+    }
+  ],
+  "savedAt": "2026-04-23T19:19:29.607Z"
+}
