@@ -3464,8 +3464,22 @@
         {
           "name": "fairlife",
           "qty": 2
+        },
+        {
+          "name": "oz tuna",
+          "qty": 2
+        },
+        {
+          "name": "crackers",
+          "qty": 6
         }
       ],
+      "notes": "tuna was Bumblebee snack pack"
+    },
+    {
+      "date": "2026-06-27",
+      "weight": 252,
+      "foods": [],
       "notes": ""
     }
   ],
@@ -3679,5 +3693,5 @@
     }
   ],
   "height": 70,
-  "savedAt": "2026-06-27T02:16:57.403Z"
+  "savedAt": "2026-06-27T14:02:14.757Z"
 }

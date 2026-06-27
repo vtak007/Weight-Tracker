@@ -7,10 +7,13 @@ A self-contained HTML/JavaScript web app for tracking daily weight and food inta
 ## Getting started
 
 1. Open `weight-tracker.html` in your browser.
-2. Click **New Data File** to create a JSON file on disk. All changes auto-save to it.
-3. On future visits, click **Open Data File** to reload your saved data.
+2. Click **Browse** to select the folder where your data file lives. The app remembers this folder permanently (stored in IndexedDB) so you only need to do this once.
+3. Click **New Data File** to create a JSON file in that folder. All changes auto-save to it.
+4. On future visits, click **Open Data File** — the app opens the JSON file automatically from the saved folder with no file explorer dialog.
 
 Without linking a file, data is stored in browser `localStorage` only and will be lost if browser data is cleared.
+
+> **First-time permission:** After reopening the app, clicking **Open Data File** will trigger a one-time Chrome permission prompt for the saved folder. Choose **Every Visit** to avoid being prompted on future reloads.
 
 ---
 
@@ -42,7 +45,7 @@ Also contains:
 
 **BMI Tracker** — enter your height once; the app calculates and displays your current BMI with a color-coded gauge (Underweight → Normal → Overweight → Obese), your BMI at goal weight, and how much weight separates you from the Normal range.
 
-**Milestones** — add intermediate weight targets between your starting and goal weight. Each milestone shows a progress bar and remaining lbs.
+**Milestones** — add intermediate weight targets between your starting and goal weight. Each milestone shows a progress bar, remaining lbs, and an editable **Date to Complete** field. The date can be set when adding a milestone or updated at any time directly on the milestone card.
 
 **Weight Trend Chart** — SVG line chart of daily weights with a 7-day moving average overlay and optional goal line. Filterable to 7 / 30 / 90 days or All Time. Hover over a dot for the exact weight and day-over-day change.
 

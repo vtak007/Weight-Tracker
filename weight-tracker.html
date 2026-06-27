@@ -272,9 +272,27 @@
       </div>
       <div class="last-saved" id="last-saved"></div>
     </div>
-    <div class="storage-actions">
-      <button onclick="openDataFile()">Open Data File</button>
-      <button class="btn-secondary" onclick="createDataFile()">New Data File</button>
+    <div class="storage-actions" style="flex-direction:column;align-items:flex-start">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;width:100%">
+        <label style="white-space:nowrap;font-size:0.85rem;color:#94a3b8">Data Directory:</label>
+        <input type="text" id="dir-path-display" readonly placeholder="Not set — file picker opens at default location"
+          style="flex:1;min-width:180px;background:#1e293b;border:1px solid #334155;border-radius:6px;color:#e2e8f0;padding:5px 10px;font-size:0.85rem">
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-secondary" onclick="pickDataDirectory()">Browse</button>
+        <button onclick="openDataFile()">Open Data File</button>
+        <button class="btn-secondary" onclick="createDataFile()">New Data File</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- File picker modal (shown when directory has multiple JSON files) -->
+  <div id="file-picker-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center">
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:24px;min-width:320px;max-width:480px;width:90%">
+      <h3 style="margin:0 0 12px;color:#e2e8f0">Select Data File</h3>
+      <p style="font-size:0.85rem;color:#94a3b8;margin:0 0 14px">Multiple JSON files found in the selected directory:</p>
+      <div id="file-picker-list" style="display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto"></div>
+      <button class="btn-secondary" style="margin-top:16px;width:100%" onclick="closeFilePicker()">Cancel</button>
     </div>
   </div>
 
@@ -360,6 +378,10 @@
         <div class="form-group">
           <label>Target Weight (lbs)</label>
           <input type="number" id="milestone-target" step="0.1" placeholder="e.g. 250.0">
+        </div>
+        <div class="form-group">
+          <label>Date to Complete</label>
+          <input type="date" id="milestone-due">
         </div>
         <button onclick="saveMilestone()">Add</button>
       </div>
@@ -548,6 +570,7 @@ const HEIGHT_KEY = 'weightTrackerHeight';
 // ── File System Storage ──
 
 let fileHandle = null;
+let dirHandle = null;
 let chartRange = 'all';
 let avgChartRange = 'all';
 let historySort = { col: 'date', dir: 'desc' }; // col: 'date'|'change', dir: 'asc'|'desc'
@@ -687,33 +710,119 @@ async function autoSaveToFile() {
   }
 }
 
+// ── Directory handle persistence (IndexedDB) ──
+
+function openHandleDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open('weightTrackerDB', 1);
+    req.onupgradeneeded = e => e.target.result.createObjectStore('handles');
+    req.onsuccess = e => resolve(e.target.result);
+    req.onerror = e => reject(e.target.error);
+  });
+}
+
+async function saveDirHandle(handle) {
+  const db = await openHandleDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('handles', 'readwrite');
+    tx.objectStore('handles').put(handle, 'dirHandle');
+    tx.oncomplete = resolve;
+    tx.onerror = e => reject(e.target.error);
+  });
+}
+
+async function loadDirHandle() {
+  const db = await openHandleDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('handles', 'readonly');
+    const req = tx.objectStore('handles').get('dirHandle');
+    req.onsuccess = e => resolve(e.target.result || null);
+    req.onerror = e => reject(e.target.error);
+  });
+}
+
+async function restoreDirHandle() {
+  try {
+    const handle = await loadDirHandle();
+    if (!handle) return;
+    dirHandle = handle;
+    document.getElementById('dir-path-display').value = dirHandle.name;
+  } catch (_) {}
+}
+
+async function pickDataDirectory() {
+  try {
+    dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+    document.getElementById('dir-path-display').value = dirHandle.name;
+    await saveDirHandle(dirHandle);
+  } catch (err) {
+    if (err.name !== 'AbortError') alert('Could not access directory: ' + err.message);
+  }
+}
+
+async function loadFromHandle(handle) {
+  fileHandle = handle;
+  const file = await fileHandle.getFile();
+  const text = await file.text();
+  const data = JSON.parse(text);
+  loadAllData(data);
+  updateStorageStatus(true);
+  renderAll();
+  alert(`Loaded ${(data.entries || []).length} entries from ${fileHandle.name}`);
+}
+
+function showFilePicker(handles) {
+  const list = document.getElementById('file-picker-list');
+  list.innerHTML = handles.map((h, i) =>
+    `<button onclick="selectFileFromPicker(${i})" style="text-align:left;background:#0f172a;border:1px solid #334155;border-radius:6px;color:#e2e8f0;padding:8px 12px;font-size:0.9rem;cursor:pointer">${escapeHtml(h.name)}</button>`
+  ).join('');
+  document.getElementById('file-picker-modal').style.display = 'flex';
+  window._filePickerHandles = handles;
+}
+
+async function selectFileFromPicker(index) {
+  closeFilePicker();
+  await loadFromHandle(window._filePickerHandles[index]);
+}
+
+function closeFilePicker() {
+  document.getElementById('file-picker-modal').style.display = 'none';
+  window._filePickerHandles = null;
+}
+
 async function openDataFile() {
   try {
-    const [handle] = await window.showOpenFilePicker({
+    if (dirHandle) {
+      const perm = await dirHandle.requestPermission({ mode: 'readwrite' });
+      if (perm === 'granted') {
+        const jsonFiles = [];
+        for await (const entry of dirHandle.values()) {
+          if (entry.kind === 'file' && entry.name.endsWith('.json')) jsonFiles.push(entry);
+        }
+        if (jsonFiles.length === 1) { await loadFromHandle(jsonFiles[0]); return; }
+        if (jsonFiles.length > 1) { showFilePicker(jsonFiles); return; }
+      }
+    }
+    const opts = {
       types: [{ description: 'JSON Data File', accept: { 'application/json': ['.json'] } }],
       multiple: false
-    });
-    fileHandle = handle;
-    const file = await fileHandle.getFile();
-    const text = await file.text();
-    const data = JSON.parse(text);
-    loadAllData(data);
-    updateStorageStatus(true);
-    renderAll();
-    alert(`Loaded ${(data.entries || []).length} entries from ${fileHandle.name}`);
+    };
+    if (dirHandle) opts.startIn = dirHandle;
+    const [handle] = await window.showOpenFilePicker(opts);
+    await loadFromHandle(handle);
   } catch (err) {
-    if (err.name !== 'AbortError') {
-      alert('Failed to open file: ' + err.message);
-    }
+    if (err.name !== 'AbortError') alert('Failed to open file: ' + err.message);
   }
 }
 
 async function createDataFile() {
   try {
-    const handle = await window.showSaveFilePicker({
+    const opts = {
       suggestedName: 'weight-tracker-data.json',
       types: [{ description: 'JSON Data File', accept: { 'application/json': ['.json'] } }]
-    });
+    };
+    if (dirHandle) opts.startIn = dirHandle;
+    const handle = await window.showSaveFilePicker(opts);
     fileHandle = handle;
     await autoSaveToFile();
     alert(`Data file created: ${fileHandle.name}\nAll changes will auto-save to this file.`);
@@ -956,15 +1065,22 @@ function saveMilestone() {
   const label = document.getElementById('milestone-label').value.trim();
   const target = parseFloat(document.getElementById('milestone-target').value);
   if (isNaN(target)) { alert('Enter a valid target weight.'); return; }
+  const due = document.getElementById('milestone-due').value;
 
   const milestones = getMilestones();
-  milestones.push({ id: Date.now(), label, target });
+  milestones.push({ id: Date.now(), label, target, due });
   milestones.sort((a, b) => b.target - a.target);
   setMilestones(milestones);
 
   document.getElementById('milestone-label').value = '';
   document.getElementById('milestone-target').value = '';
+  document.getElementById('milestone-due').value = '';
   renderMilestones();
+}
+
+function updateMilestoneDue(id, value) {
+  const milestones = getMilestones().map(m => m.id === id ? { ...m, due: value } : m);
+  setMilestones(milestones);
 }
 
 function deleteMilestone(id) {
@@ -1019,6 +1135,11 @@ function renderMilestones() {
         <div class="milestone-bar-fill" style="width:${pct.toFixed(1)}%;background:${color}"></div>
       </div>
       <div class="milestone-status">${statusHtml}</div>
+      <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+        <label style="font-size:0.8rem;color:#94a3b8;white-space:nowrap">Date to Complete:</label>
+        <input type="date" value="${m.due || ''}" style="background:#1e293b;border:1px solid #334155;border-radius:6px;color:#e2e8f0;padding:3px 7px;font-size:0.8rem"
+          onchange="updateMilestoneDue(${m.id}, this.value)">
+      </div>
     </div>`;
   }).join('');
 }
@@ -1912,7 +2033,8 @@ function renderAll() {
 document.getElementById('entry-date').value = new Date().toISOString().split('T')[0];
 document.getElementById('doctor-date').value = new Date().toISOString().split('T')[0];
 renderAll();
-updateStorageStatus(false);</script>
+updateStorageStatus(false);
+restoreDirHandle();</script>
 </body>
 </html>
 
