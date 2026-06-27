@@ -3440,6 +3440,33 @@
         }
       ],
       "notes": ""
+    },
+    {
+      "date": "2026-06-26",
+      "weight": 251.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "diet coke",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
     }
   ],
   "goal": 225,
@@ -3652,5 +3679,5 @@
     }
   ],
   "height": 70,
-  "savedAt": "2026-06-26T00:02:57.676Z"
+  "savedAt": "2026-06-27T02:16:57.403Z"
 }
