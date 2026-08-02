@@ -4398,6 +4398,56 @@
     {
       "date": "2026-07-30",
       "weight": 255.1,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "caramel cashews",
+          "qty": 1
+        },
+        {
+          "name": "bluebell",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-07-31",
+      "weight": 254.1,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "shrimp etouffee",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 5
+        },
+        {
+          "name": "cups cereal",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-01",
+      "weight": 255.6,
       "foods": [],
       "notes": ""
     }
@@ -4638,5 +4688,5 @@
     }
   ],
   "height": 70,
-  "savedAt": "2026-07-30T14:07:01.822Z"
+  "savedAt": "2026-08-01T14:50:58.491Z"
 }
