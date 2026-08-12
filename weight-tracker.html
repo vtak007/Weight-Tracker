@@ -1521,12 +1521,23 @@ function renderDoctorVisits() {
   const entries = getEntries();
   const currentWeight = entries.length > 0 ? entries[entries.length - 1].weight : null;
 
-  container.innerHTML = `<div class="record-grid">${visits.map((visit, idx) => {
+  // visits is newest-first, so the first entry seen for each doctor is their latest visit
+  const seenDoctors = new Set();
+  const latestPerDoctor = new Set();
+  visits.forEach(v => {
+    const key = v.doctor.toLowerCase();
+    if (!seenDoctors.has(key)) {
+      seenDoctors.add(key);
+      latestPerDoctor.add(v.date + '|' + key);
+    }
+  });
+
+  container.innerHTML = `<div class="record-grid">${visits.map(visit => {
     const diff = visit.officeWeight - visit.homeWeight;
     const diffCls = diff < 0 ? 'change-neg' : diff > 0 ? 'change-pos' : 'change-zero';
 
     let nowPill = '';
-    if (idx < 2 && currentWeight !== null) {
+    if (currentWeight !== null && latestPerDoctor.has(visit.date + '|' + visit.doctor.toLowerCase())) {
       const sinceChange = currentWeight - visit.homeWeight;
       const sinceCls = sinceChange < 0 ? 'change-neg' : sinceChange > 0 ? 'change-pos' : 'change-zero';
       nowPill = `<div class="metric-pill ${sinceCls}">Current vs. Home: ${sinceChange > 0 ? '+' : ''}${sinceChange.toFixed(1)} lbs</div>`;
