@@ -112,16 +112,19 @@ Doctor visits are held **newest-first** — code that walks them relies on that 
 
 ## 🌿 Git State
 
-- **Remote:** `vtak007/Weight-Tracker` — private. Backups are pushed manually.
-- **Current branch:** `fix-doctor-current-vs-home` (ahead of `main`, not yet merged)
-- **Working tree is dirty:**
-  - `weight-tracker.html` — *"Current vs. Home"* pill now shows on the **latest visit per doctor**
-    instead of the two most recent visits overall (`renderDoctorVisits`, ~line 1521)
-  - `weight-tracker-data_2026.json` — new entries appended
+- **Remote:** `vtak007/Weight-Tracker` — private. Both branches below are pushed and in sync.
+- **Current branch:** `fix-doctor-current-vs-home` — one commit ahead of `main`, awaiting
+  in-browser verification before merging
+  - `7e38253` — *"Current vs. Home"* pill now shows on the **latest visit per doctor** instead of
+    the two most recent visits overall (`renderDoctorVisits`, ~line 1521)
+- **`main`:** `8e2db06`
+- **Working tree:** `weight-tracker-data_2026.json` only — new entries appended, uncommitted
 
 ### History
 
 ```
+7e38253  Show Current vs. Home pill on each doctor's latest visit   (branch only)
+8e2db06  Add Workspace Map.md — project navigation document
 d06b04a  Add MEMORY.md (standard project structure)
 ea67f2c  Add food-log data entries (2026)
 63a4a17  Merge: update 2026 tracking data
@@ -134,7 +137,7 @@ fe1f371  Update 2026 tracker data
 > [!NOTE]
 > **Data commits are noise**
 > The `.json` changes on nearly every use, so most commits are pure data churn.
-> When reading history for *code* changes, look at `cfce9d6` and `0274cfe`.
+> When reading history for *code* changes, look at `7e38253`, `cfce9d6` and `0274cfe`.
 
 ---
 
