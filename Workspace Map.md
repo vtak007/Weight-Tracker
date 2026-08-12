@@ -41,12 +41,15 @@ tags: [workspace-map, weight-tracker, html-app, personal-health]
 ## 🧩 App Anatomy — `weight-tracker.html`
 
 ```
-lines    1–6    <head>
-lines    7–261  <style>        all CSS
-lines  262–561  <body>         markup + 8 tab panels
-lines  562–2066 <script>       all JS
-line   2048     restoreDirHandle()   ← boot entry point
+~1–6      <head>
+~7–261    <style>     all CSS
+~262–561  <body>      markup + 8 tab panels
+~562–end  <script>    all JS
 ```
+
+Ranges are approximate and drift as the file grows — they're here for a sense of proportion, not
+for navigation. `restoreDirHandle()` is the boot entry point: it's the last statement in the
+script, called on load.
 
 ### Tab panels (DOM ids)
 
@@ -147,11 +150,14 @@ branch. No PRs, no CI.
 
 | I want to… | Go to |
 |---|---|
-| Change how weight is charted | `renderChart` (~1157), `computeMovingAvg` (~1149) |
-| Touch BMI logic | `renderBMI` (~1000), `bmiCategory` (~982) |
-| Adjust food matching | `analyzeFoods` (~1360), `parseFoods` (~2013) |
-| Change what's saved | `getAllData` (~658), `loadAllData` (~670) |
-| Fix a file-linking bug | `restoreDirHandle` (~744) → `openDataFile` (~793) |
+| Change how weight is charted | `renderChart()`, `computeMovingAvg()` |
+| Touch BMI logic | `renderBMI()`, `bmiCategory()` |
+| Adjust food matching | `analyzeFoods()`, `parseFoods()` |
+| Change what's saved | `getAllData()`, `loadAllData()` |
+| Fix a file-linking bug | `restoreDirHandle()` → `openDataFile()` |
+
+Every name above is unique within `weight-tracker.html` — search for it rather than scrolling to a
+line number. No line numbers here on purpose; they drift, function names don't.
 
 ---
 
