@@ -47,7 +47,7 @@ Also contains:
 
 **Milestones** — add intermediate weight targets between your starting and goal weight. Each milestone shows a progress bar, remaining lbs, and an editable **Date to Complete** field. The date can be set when adding a milestone or updated at any time directly on the milestone card.
 
-**Weight Trend Chart** — SVG line chart of daily weights with a 7-day moving average overlay and optional goal line. Filterable to 7 / 30 / 90 days or All Time. Hover over a dot for the exact weight and day-over-day change.
+**Weight Trend Chart** — SVG line chart of daily weights with a 7-day moving average overlay and optional goal line. Filterable to 7 / 30 / 90 days, This Week (Monday–today), This Month (1st–today), or All Time. Hover over a dot for the exact weight and day-over-day change.
 
 ---
 
@@ -119,7 +119,6 @@ Enter a current weight, a projected daily loss rate, and a target date. The app 
 |---|---|
 | `weight-tracker.html` | Main app — open this in your browser |
 | `weight-tracker-data_2026.json` | Live data file for 2026 |
-| `weight-tracker - Copy.html` | Backup copy of the main app |
 | `Blank Weight-Tracker Page.png` | Screenshot of the app with no data |
 
 ## Requirements

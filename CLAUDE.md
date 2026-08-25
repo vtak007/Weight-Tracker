@@ -6,7 +6,6 @@
 |---|---|
 | `weight-tracker.html` | Main app — open this in your browser |
 | `weight-tracker-data_2026.json` | Live data file for 2026 (contains real personal health data) |
-| `weight-tracker - Copy.html` | Backup copy of the main app |
 | `Readme.md` | Project readme — describes all tabs, features, and data storage |
 | `Blank Weight-Tracker Page.png` | Screenshot of the app with no data |
 
