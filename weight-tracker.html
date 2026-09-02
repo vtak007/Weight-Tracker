@@ -749,6 +749,15 @@ async function restoreDirHandle() {
     if (!handle) return;
     dirHandle = handle;
     document.getElementById('dir-path-display').value = dirHandle.name;
+
+    const perm = await dirHandle.queryPermission({ mode: 'readwrite' });
+    if (perm !== 'granted') return;
+
+    const jsonFiles = [];
+    for await (const entry of dirHandle.values()) {
+      if (entry.kind === 'file' && entry.name.endsWith('.json')) jsonFiles.push(entry);
+    }
+    if (jsonFiles.length === 1) await loadFromHandle(jsonFiles[0], { silent: true });
   } catch (_) {}
 }
 
@@ -762,7 +771,7 @@ async function pickDataDirectory() {
   }
 }
 
-async function loadFromHandle(handle) {
+async function loadFromHandle(handle, { silent = false } = {}) {
   fileHandle = handle;
   const file = await fileHandle.getFile();
   const text = await file.text();
@@ -770,7 +779,7 @@ async function loadFromHandle(handle) {
   loadAllData(data);
   updateStorageStatus(true);
   renderAll();
-  alert(`Loaded ${(data.entries || []).length} entries from ${fileHandle.name}`);
+  if (!silent) alert(`Loaded ${(data.entries || []).length} entries from ${fileHandle.name}`);
 }
 
 function showFilePicker(handles) {

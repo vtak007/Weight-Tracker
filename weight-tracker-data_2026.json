@@ -2461,7 +2461,7 @@
           "qty": 1
         },
         {
-          "name": "caramel cashew bars",
+          "name": "cashew bars",
           "qty": 2
         },
         {
@@ -2703,7 +2703,7 @@
           "qty": 1
         },
         {
-          "name": "caramel cashew bar",
+          "name": "cashew bar",
           "qty": 1
         },
         {
@@ -4920,11 +4920,288 @@
     {
       "date": "2026-08-21",
       "weight": 254.1,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-22",
+      "weight": 253.1,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "fries",
+          "qty": 10
+        },
+        {
+          "name": "grilled cheese sandwich",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-23",
+      "weight": 253.7,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "salmon sandwich",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "chicken bites",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-24",
+      "weight": 253.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "salmon sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "veggies",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-25",
+      "weight": 252.7,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "cashew bar",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-26",
+      "weight": 253.2,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "salmon sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 4
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-27",
+      "weight": 252.9,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 5
+        },
+        {
+          "name": "cups cereal",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-28",
+      "weight": 253.9,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        },
+        {
+          "name": "cups cereal",
+          "qty": 2
+        },
+        {
+          "name": "caramel cashews",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-29",
+      "weight": 254.9,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 4
+        },
+        {
+          "name": "cups cereal",
+          "qty": 4
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-30",
+      "weight": 254.3,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "chicken bites",
+          "qty": 1
+        },
+        {
+          "name": "onion rings",
+          "qty": 1
+        },
+        {
+          "name": "cups cereal",
+          "qty": 4
+        },
+        {
+          "name": "fairlife",
+          "qty": 4
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-08-31",
+      "weight": 254.6,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "salmon sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-01",
+      "weight": 253.1,
       "foods": [],
       "notes": ""
     }
   ],
-  "goal": 220,
+  "goal": 170,
   "doctorVisits": [
     {
       "date": "2017-03-21",
@@ -5159,18 +5436,36 @@
       "due": "2026-08-28"
     },
     {
-      "id": 1787271761717,
+      "id": 1787627821894,
       "label": "Goal 2",
-      "target": 246.2,
+      "target": 246.4,
       "due": "2026-09-04"
     },
     {
-      "id": 1787271921354,
+      "id": 1787627873248,
       "label": "Goal 3",
-      "target": 241.8,
+      "target": 242.2,
       "due": "2026-09-11"
+    },
+    {
+      "id": 1787627911565,
+      "label": "Goal 4",
+      "target": 238,
+      "due": "2026-09-18"
+    },
+    {
+      "id": 1787627946630,
+      "label": "Goal 5",
+      "target": 233.8,
+      "due": "2026-09-25"
+    },
+    {
+      "id": 1787628009305,
+      "label": "Goal 6",
+      "target": 230.2,
+      "due": "2026-10-01"
     }
   ],
   "height": 70,
-  "savedAt": "2026-08-21T15:19:28.647Z"
+  "savedAt": "2026-09-02T02:05:24.306Z"
 }

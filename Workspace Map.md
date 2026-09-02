@@ -83,7 +83,7 @@ flowchart TD
 | Piece | Function(s) | Note |
 |---|---|---|
 | Directory handle store | `openHandleDB`, `saveDirHandle`, `loadDirHandle` | Kept in **IndexedDB** so the folder survives reloads |
-| Boot restore | `restoreDirHandle()` | Runs on load; last line of the script |
+| Boot restore | `restoreDirHandle()` | Runs on load; last line of the script. If the saved directory handle still has granted permission (`queryPermission`, no prompt), it silently re-finds the single `.json` file and calls `loadFromHandle(handle, {silent:true})` to re-link without user action |
 | Folder pick | `pickDataDirectory()` | One-time **Browse**; choose *Every Visit* at the Chrome prompt |
 | Open / create | `openDataFile`, `createDataFile`, `loadFromHandle` | File picker UI: `showFilePicker` / `selectFileFromPicker` |
 | Auto-save | `autoSaveToFile()` | Fires on every mutation |

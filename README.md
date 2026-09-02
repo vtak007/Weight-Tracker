@@ -9,11 +9,11 @@ A self-contained HTML/JavaScript web app for tracking daily weight and food inta
 1. Open `weight-tracker.html` in your browser.
 2. Click **Browse** to select the folder where your data file lives. The app remembers this folder permanently (stored in IndexedDB) so you only need to do this once.
 3. Click **New Data File** to create a JSON file in that folder. All changes auto-save to it.
-4. On future visits, click **Open Data File** — the app opens the JSON file automatically from the saved folder with no file explorer dialog.
+4. On future visits (including page refresh), the app automatically re-links to the JSON file in the saved folder — no click needed, as long as folder permission is still granted.
 
 Without linking a file, data is stored in browser `localStorage` only and will be lost if browser data is cleared.
 
-> **First-time permission:** After reopening the app, clicking **Open Data File** will trigger a one-time Chrome permission prompt for the saved folder. Choose **Every Visit** to avoid being prompted on future reloads.
+> **First-time permission:** The first time a browser session grants folder access, choose **Every Visit** in the Chrome prompt. If permission ever lapses (e.g. new browser profile), use **Open Data File** to reconnect manually.
 
 ---
 
