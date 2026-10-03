@@ -121,6 +121,10 @@ Enter a current weight, a projected daily loss rate, and a target date. The app 
 | `weight-tracker-data_2026.json` | Live data file for 2026 |
 | `Blank Weight-Tracker Page.png` | Screenshot of the app with no data |
 
+## Backup
+
+The whole project folder is copied daily (06:20) to Google Drive (Weight Tracker folder) by a Windows scheduled task running an rclone PowerShell script kept outside this repo. .git and .remember are excluded. See CLAUDE.md for details.
+
 ## Requirements
 
 - Any modern browser with File System Access API support (Chrome 86+, Edge 86+)

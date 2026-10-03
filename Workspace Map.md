@@ -4,7 +4,7 @@ type: workspace-map
 project: Weight Tracker
 path: D:/Dropbox/Computing1/BatchFiles_Scripts/Claude Projects/Weight Tracker
 repo: vtak007/Weight-Tracker (private)
-updated: 2026-08-12
+updated: 2026-10-03
 tags: [workspace-map, weight-tracker, html-app, personal-health]
 ---
 
@@ -110,6 +110,17 @@ flowchart TD
 
 Entries are stored **oldest→newest**; `entries[entries.length - 1]` is the current weight.
 Doctor visits are held **newest-first** — code that walks them relies on that ordering.
+
+---
+
+## ☁️ Backup (external to repo)
+
+| Piece | Location |
+|---|---|
+| Scheduled task | `Rclone BackupWeight Tracker JSON to gdrive` — daily 06:20, Task Scheduler root folder |
+| Script | `D:/Dropbox/Computing1/BatchFiles_Scripts/PowershellScripts/rclone-copy_WeightTracker.ps1` |
+| Source → dest | Dropbox remote `Computing1/BatchFiles_Scripts/Claude Projects/Weight Tracker` → `Gdrive:/Weight Tracker` (excludes `.git/`, `.remember/`) |
+| Log | `C:/Users/Perdi/Documents/rclone-copy_WeightTracker.log` |
 
 ---
 
