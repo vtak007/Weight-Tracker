@@ -9,3 +9,6 @@ desktop.ini
 
 # Dropbox conflicted copies
 *conflicted copy*
+
+# Secrets (live outside the repo; ignored here as a safeguard)
+auth-config.php
