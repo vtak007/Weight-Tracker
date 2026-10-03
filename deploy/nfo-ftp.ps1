@@ -26,6 +26,8 @@ function New-NfoSession {
     $opt.TlsHostCertificateFingerprint = $NfoFingerprint
 
     $session = New-Object WinSCP.Session
+    # Optional debug log (WinSCP masks passwords): set $env:WT_WINSCP_LOG to a file path.
+    if ($env:WT_WINSCP_LOG) { $session.SessionLogPath = $env:WT_WINSCP_LOG }
     try { $session.Open($opt) } catch { $session.Dispose(); throw }
     return $session
 }
