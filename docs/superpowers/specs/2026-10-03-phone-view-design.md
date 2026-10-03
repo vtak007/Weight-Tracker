@@ -1,6 +1,6 @@
 # Weight Tracker — iPhone View-Only Access (Design)
 
-Date: 2026-10-03 · Branch: `add-phone-view` · Status: draft for review
+Date: 2026-10-03 · Branch: `add-phone-view` · Status: approved to plan (host facts verified)
 
 ## Goal
 
@@ -27,7 +27,8 @@ PC (Task Scheduler, daily 10:00)            NFO host  /weight/
   upload-weighttracker.ps1  --FTP-->  index.php        (login gate + serves the app)
   weight-tracker-data_2026.json       data.php         (gate-checked JSON endpoint)
                                       weight-tracker.html  (same file as PC, served by index.php)
-                                      data/…json       (not directly web-reachable; see Security)
+PC (FTP, one-time)  auth-config.php --FTP-->  /usr/www/titan7/weight-private/  (above web root)
+PC (FTP, daily)     the data .json  --FTP-->  /usr/www/titan7/weight-private/  (never web-served)
 iPhone Safari --HTTPS--> index.php --(session cookie)--> app --fetch--> data.php
 ```
 
@@ -51,18 +52,33 @@ Subfolder `/weight/` under the NFO web root, separate from the public `scores.ph
 
 - `index.php`: shows a password form if there is no valid session; on success sets a session cookie
   (`HttpOnly`, `Secure`, `SameSite=Strict`, ~30-day lifetime so the phone stays signed in) and serves
-  the app HTML. The password is stored as a `password_hash()` hash in a config file outside the
-  repo; `password_verify()` checks it. Failed attempts are rate-limited (small delay + lockout counter).
+  the app HTML. `password_verify()` checks the password against a bcrypt hash held in
+  `auth-config.php` (see "Password setup"). Failed attempts are rate-limited (small delay + lockout
+  counter, state kept in `weight-private/`).
+- Server paths: the web folder is `/usr/www/titan7/public/FMJfiles/weight/`; the private folder is
+  `/usr/www/titan7/weight-private/` (= `dirname(__DIR__, 3) . '/weight-private'` from the web folder).
 - `data.php`: returns the JSON only with a valid session; otherwise 401. Sends `Cache-Control:
   no-store` and `X-Content-Type-Options: nosniff`.
-- Fallback if PHP sessions misbehave on NFO: HTTP Basic Auth via `.htaccess`. To be checked during
-  implementation (NFO `AllowOverride` is unconfirmed).
+- Fallback if PHP sessions misbehave on NFO: HTTP Basic Auth via `.htaccess` (confirmed honored on
+  NFO — see "Verified host facts").
+
+#### Password setup
+
+- You choose the password. It is never typed into the Claude chat, never stored in the repo, and
+  never exists in plain text on the server.
+- When: during implementation, at the deploy step, before the first live test.
+- How: a local helper script prompts for the password with hidden input and writes only a bcrypt
+  hash to a local, untracked, gitignored `auth-config.php` (a PHP file returning the hash).
+- Where: you FTP-upload `auth-config.php` once to `/usr/www/titan7/weight-private/`. `index.php`
+  and `data.php` load it from there.
+- Changing it later: re-run the helper and re-upload that one file.
 
 ### 4. Data sync
 
 - `upload-weighttracker.ps1` (outside the repo, next to `rclone-copy_WeightTracker.ps1` in
-  `PowershellScripts`) uploads `weight-tracker-data_2026.json` by FTP to the `/weight/` data
-  location. FTP host/user/password are read from a local untracked `.ini`.
+  `PowershellScripts`) uploads `weight-tracker-data_2026.json` by FTP to
+  `/usr/www/titan7/weight-private/` (FTP root is `/usr/www/titan7`, so the remote path is
+  `/weight-private/`). FTP host/user/password are read from a local untracked `.ini`.
 - Windows scheduled task **daily at 10:00 AM** runs the script (same pattern as the existing rclone
   task; creating/editing the task needs elevated PowerShell). The script can also be run by hand.
 - Logs to `C:\Users\Perdi\Documents\upload-weighttracker.log`.
@@ -72,9 +88,11 @@ Subfolder `/weight/` under the NFO web root, separate from the public `scores.ph
 ## Security
 
 - HTTPS only; session cookie flags as above; no password or FTP credentials in the repo.
-- The JSON is served only through `data.php`. If a non-web-reachable directory above the document
-  root is writable via FTP, the JSON lives there; otherwise the data folder gets a deny-all
-  `.htaccess` (verified by requesting the file URL directly and expecting 403/404).
+- The JSON and `auth-config.php` live in `/usr/www/titan7/weight-private/`, above the web root, and
+  are served only through `data.php` after the login check. The folder is not web-reachable
+  (verified: a URL to a file in it returns 404).
+- NFO is shared hosting and PHP can list sibling customers' folder names under `/usr/www`; keep
+  nothing sensitive in the web root and never expose directory listings.
 - `robots.txt` / `X-Robots-Tag: noindex` on the folder.
 - Phone-mode JS inserts data via existing escaping paths; no new HTML injection surface.
 
@@ -87,11 +105,18 @@ No test suite; verify manually, deploying only from committed state (feature bra
 4. iPhone Safari (cellular, off home Wi-Fi): login, all tabs, layout at phone width, "Last updated".
 5. Scheduled task: manual run uploads; confirm the 10:00 trigger fires and the log updates.
 
+## Verified host facts (probed 2026-10-03)
+
+- `.htaccess` is honored (a `Require all denied` folder returned 403).
+- PHP 8.4.24; `open_basedir` empty; FTP root is `/usr/www/titan7`.
+- `/usr/www/titan7/weight-private/` exists, is readable and writable by PHP, can read a file
+  uploaded over FTP, and is not reachable by URL (404).
+
 ## Open items to resolve during implementation
 
-- Whether NFO allows a writable directory above the document root; whether `.htaccess` is honored.
 - Phone layout of the existing tabs (only one `@media (max-width: 600px)` block exists today).
-- Where the web password hash is stored on NFO.
+- Whether a local PHP/bcrypt tool is available for the password helper (no local `php` binary;
+  likely a small Python script using the `bcrypt` package, emitting a PHP-compatible `$2y$` hash).
 
 ## Docs (after tested sign-off only)
 
