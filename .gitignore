@@ -12,3 +12,4 @@ desktop.ini
 
 # Secrets (live outside the repo; ignored here as a safeguard)
 auth-config.php
+__pycache__/
