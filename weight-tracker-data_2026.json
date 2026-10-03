@@ -1142,7 +1142,7 @@
           "qty": 1
         },
         {
-          "name": "cookies",
+          "name": "chocolate-striped cookies",
           "qty": 6
         }
       ],
@@ -1424,8 +1424,8 @@
           "qty": 1
         },
         {
-          "name": "belgian waffle cookies",
-          "qty": 1
+          "name": "waffle cookies",
+          "qty": 2
         },
         {
           "name": "nestle bites",
@@ -2856,8 +2856,8 @@
           "qty": 1
         },
         {
-          "name": "belgian  waffle cookies",
-          "qty": 1
+          "name": "waffle cookies",
+          "qty": 2
         },
         {
           "name": "bb cafe",
@@ -3018,7 +3018,7 @@
           "qty": 3
         },
         {
-          "name": "tbsp nesquick",
+          "name": "tbsp chocolate syrup",
           "qty": 2
         }
       ],
@@ -3991,8 +3991,8 @@
           "qty": 1
         },
         {
-          "name": "belgian waffle cookies",
-          "qty": 1
+          "name": "waffle cookies",
+          "qty": 2
         },
         {
           "name": "caramel cashews",
@@ -4657,7 +4657,7 @@
           "qty": 1
         },
         {
-          "name": "striped cookies",
+          "name": "chocolate-striped cookies",
           "qty": 6
         },
         {
@@ -4792,7 +4792,7 @@
           "qty": 3
         },
         {
-          "name": "tuna snack pack",
+          "name": "tuna pack",
           "qty": 1
         }
       ],
@@ -5197,11 +5197,879 @@
     {
       "date": "2026-09-01",
       "weight": 253.1,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "shrimp etoufee",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "spaghetti",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-02",
+      "weight": 253.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-03",
+      "weight": 252.6,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-04",
+      "weight": 252.1,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "seafood caserole",
+          "qty": 1
+        },
+        {
+          "name": "rice",
+          "qty": 1
+        },
+        {
+          "name": "corn",
+          "qty": 1
+        },
+        {
+          "name": "baked fish",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "chips",
+          "qty": 1
+        },
+        {
+          "name": "waffle cookies",
+          "qty": 2
+        },
+        {
+          "name": "bluebell",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-05",
+      "weight": 254.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "hot tamales",
+          "qty": 1
+        },
+        {
+          "name": "chocolate-striped cookies",
+          "qty": 8
+        },
+        {
+          "name": "oz cashews",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-06",
+      "weight": 255.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "tuna pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 4
+        },
+        {
+          "name": "cups cereal",
+          "qty": 4
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-07",
+      "weight": 252.9,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "salmon sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 4
+        },
+        {
+          "name": "tbps chocolate syrup",
+          "qty": 4
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-08",
+      "weight": 252.6,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "nestle bites",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "cheese cubes",
+          "qty": 10
+        },
+        {
+          "name": "crackers",
+          "qty": 6
+        },
+        {
+          "name": "grapes",
+          "qty": 12
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-09",
+      "weight": 253.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "chicken salad sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "chicken bites",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-10",
+      "weight": 252.6,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "twix bar",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "oz cashews",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 1
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 4
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-11",
+      "weight": 252.8,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "hot dog",
+          "qty": 1
+        },
+        {
+          "name": "spaghetti",
+          "qty": 1
+        },
+        {
+          "name": "cubes cheese",
+          "qty": 8
+        },
+        {
+          "name": "grapes",
+          "qty": 12
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-12",
+      "weight": 251.7,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-13",
+      "weight": 253,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "chicken bites",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "fries",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-14",
+      "weight": 252.6,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "chicken salad sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-15",
+      "weight": 251.1,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "nestle bites",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-16",
+      "weight": 250.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "oz alcohol wine",
+          "qty": 20
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-17",
+      "weight": 250.8,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-18",
+      "weight": 251.5,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "swiss rolls",
+          "qty": 12
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-19",
+      "weight": 254.5,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "spaghetti",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-20",
+      "weight": 254.6,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "spaghetti",
+          "qty": 1
+        },
+        {
+          "name": "chicken bites",
+          "qty": 1
+        },
+        {
+          "name": "fries",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 1
+        }
+      ],
+      "notes": "ideal week 09-20 to 09-27"
+    },
+    {
+      "date": "2026-09-21",
+      "weight": 253.3,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        },
+        {
+          "name": "chicken salad sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        },
+        {
+          "name": "chips",
+          "qty": 1
+        },
+        {
+          "name": "caramel cashews",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-22",
+      "weight": 253.6,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-23",
+      "weight": 252.3,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "chicken salad sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-24",
+      "weight": 251.9,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-25",
+      "weight": 251.4,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "seafood cornbread",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-26",
+      "weight": 252.7,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "chips",
+          "qty": 1
+        },
+        {
+          "name": "chocolate-striped cookies",
+          "qty": 8
+        },
+        {
+          "name": "waffle cookies",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 4
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-27",
+      "weight": 254.2,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "spaghetti",
+          "qty": 1
+        },
+        {
+          "name": "chicken bites",
+          "qty": 1
+        },
+        {
+          "name": "fries",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-28",
+      "weight": 254.3,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "chicken salad sandwiches",
+          "qty": 2
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-29",
+      "weight": 253.3,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "caramel cookie",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        },
+        {
+          "name": "tbsp chocolate syrup",
+          "qty": 2
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-09-30",
+      "weight": 253,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "spaghetti",
+          "qty": 1
+        },
+        {
+          "name": "rouses pack",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 3
+        },
+        {
+          "name": "oz chicken salad",
+          "qty": 6
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-10-01",
+      "weight": 254.2,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "fairlife",
+          "qty": 2
+        },
+        {
+          "name": "chips",
+          "qty": 1
+        },
+        {
+          "name": "waffle cookies",
+          "qty": 1
+        },
+        {
+          "name": "caramel cashews",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-10-02",
+      "weight": 254.8,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "hot dog",
+          "qty": 1
+        },
+        {
+          "name": "bb cafe",
+          "qty": 1
+        },
+        {
+          "name": "cheese",
+          "qty": 1
+        },
+        {
+          "name": "grapes",
+          "qty": 1
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "date": "2026-10-03",
+      "weight": 254.9,
       "foods": [],
       "notes": ""
     }
   ],
-  "goal": 170,
+  "goal": 220,
   "doctorVisits": [
     {
       "date": "2017-03-21",
@@ -5430,42 +6298,24 @@
   ],
   "milestones": [
     {
-      "id": 1787271728674,
-      "label": "Goal 1",
-      "target": 250.6,
-      "due": "2026-08-28"
-    },
-    {
-      "id": 1787627821894,
-      "label": "Goal 2",
-      "target": 246.4,
-      "due": "2026-09-04"
-    },
-    {
-      "id": 1787627873248,
-      "label": "Goal 3",
-      "target": 242.2,
-      "due": "2026-09-11"
-    },
-    {
-      "id": 1787627911565,
-      "label": "Goal 4",
-      "target": 238,
+      "id": 1789600092002,
+      "label": "248.8",
+      "target": 248.8,
       "due": "2026-09-18"
     },
     {
-      "id": 1787627946630,
-      "label": "Goal 5",
-      "target": 233.8,
+      "id": 1789600154368,
+      "label": "246.7",
+      "target": 246.7,
       "due": "2026-09-25"
     },
     {
-      "id": 1787628009305,
-      "label": "Goal 6",
-      "target": 230.2,
-      "due": "2026-10-01"
+      "id": 1789600466444,
+      "label": "Weight for Brignac",
+      "target": 220,
+      "due": "2026-12-17"
     }
   ],
   "height": 70,
-  "savedAt": "2026-09-02T02:05:24.306Z"
+  "savedAt": "2026-10-03T14:04:57.023Z"
 }
