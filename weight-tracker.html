@@ -252,6 +252,14 @@
   .storage-actions { display: flex; gap: 8px; }
   .last-saved { font-size: 0.75rem; color: #64748b; margin-top: 2px; }
 
+  /* Read-only (phone) mode */
+  body.readonly .ro-hide,
+  body.readonly .btn-edit,
+  body.readonly .btn-danger { display: none !important; }
+  .ro-only { display: none !important; }
+  body.readonly .ro-only { display: flex !important; }
+  .ro-only a { color: #7dd3fc; font-size: 0.85rem; }
+
   @media (max-width: 600px) {
     .form-row { flex-direction: column; }
     .form-group { min-width: 100%; }
@@ -264,8 +272,17 @@
 <div class="container">
   <h1>Weight & Food Tracker</h1>
 
+  <!-- Read-only (phone) banner -->
+  <div class="storage-banner ro-only" id="ro-banner">
+    <div>
+      <div class="storage-status" id="ro-status">Loading…</div>
+      <div class="last-saved" id="ro-updated"></div>
+    </div>
+    <a href="index.php?logout=1">Sign out</a>
+  </div>
+
   <!-- Storage Banner -->
-  <div class="storage-banner">
+  <div class="storage-banner ro-hide">
     <div>
       <div class="storage-status" id="storage-status">
         <span class="dot dot-unlinked"></span> No data file linked — using browser storage only
@@ -304,12 +321,12 @@
     <button class="tab" onclick="showTab('records', this)">Yearly Records</button>
     <button class="tab" onclick="showTab('projection', this)">Projection</button>
     <button class="tab" onclick="showTab('averages', this)">Averages</button>
-    <button class="tab" onclick="showTab('data', this)">Export / Import</button>
+    <button class="tab ro-hide" onclick="showTab('data', this)">Export / Import</button>
   </div>
 
   <!-- LOG ENTRY -->
   <div id="tab-log" class="section active">
-    <div class="card">
+    <div class="card ro-hide">
       <h2>Add Entry</h2>
       <div class="form-row">
         <div class="form-group">
@@ -338,7 +355,7 @@
     <!-- Goal Weight -->
     <div class="card">
       <h2>Goal Weight</h2>
-      <div class="form-row">
+      <div class="form-row ro-hide">
         <div class="form-group">
           <label>Target Weight (lbs)</label>
           <input type="number" id="goal-weight" step="0.1" placeholder="e.g. 170.0">
@@ -352,7 +369,7 @@
     <!-- BMI -->
     <div class="card">
       <h2>BMI Tracker</h2>
-      <div class="form-row" style="align-items:flex-end">
+      <div class="form-row ro-hide" style="align-items:flex-end">
         <div class="form-group" style="max-width:110px">
           <label>Feet</label>
           <input type="number" id="height-ft" min="1" max="8" placeholder="5">
@@ -369,8 +386,8 @@
     <!-- Milestones -->
     <div class="card">
       <h2>Milestones</h2>
-      <p style="color:#94a3b8;font-size:0.85rem;margin-bottom:14px">Set intermediate targets between your current weight and your goal.</p>
-      <div class="form-row" style="margin-bottom:16px">
+      <p class="ro-hide" style="color:#94a3b8;font-size:0.85rem;margin-bottom:14px">Set intermediate targets between your current weight and your goal.</p>
+      <div class="form-row ro-hide" style="margin-bottom:16px">
         <div class="form-group">
           <label>Label (optional)</label>
           <input type="text" id="milestone-label" placeholder="e.g. Under 255">
@@ -436,7 +453,7 @@
 
   <!-- DOCTORS -->
   <div id="tab-doctors" class="section">
-    <div class="card">
+    <div class="card ro-hide">
       <h2>Doctor Visits</h2>
       <div class="form-row">
         <div class="form-group">
@@ -472,7 +489,7 @@
 
   <!-- YEARLY RECORDS -->
   <div id="tab-records" class="section">
-    <div class="card">
+    <div class="card ro-hide">
       <h2>Yearly Low / High</h2>
       <div class="form-row">
         <div class="form-group">
@@ -539,7 +556,7 @@
   </div>
 
   <!-- EXPORT / IMPORT -->
-  <div id="tab-data" class="section">
+  <div id="tab-data" class="section ro-hide">
     <div class="card">
       <h2>Export / Import Data</h2>
       <p style="color:#94a3b8;font-size:0.85rem;margin-bottom:16px">
@@ -569,6 +586,19 @@ const YEAR_RECORDS_KEY = 'weightTrackerYearRecords';
 const MILESTONES_KEY = 'weightTrackerMilestones';
 const HEIGHT_KEY = 'weightTrackerHeight';
 
+// Read-only (phone) mode: served over http(s). On file:// the app behaves exactly as before.
+const READ_ONLY = location.protocol === 'http:' || location.protocol === 'https:';
+const store = READ_ONLY
+  ? (() => {
+      const m = new Map();
+      return {
+        getItem: k => (m.has(k) ? m.get(k) : null),
+        setItem: (k, v) => { m.set(k, String(v)); },
+        removeItem: k => { m.delete(k); }
+      };
+    })()
+  : localStorage;
+
 // ── File System Storage ──
 
 let fileHandle = null;
@@ -593,67 +623,67 @@ function setAvgChartRange(range) {
 }
 
 function getEntries() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  try { return JSON.parse(store.getItem(STORAGE_KEY)) || []; }
   catch { return []; }
 }
 
 function setEntries(entries) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  store.setItem(STORAGE_KEY, JSON.stringify(entries));
   autoSaveToFile();
 }
 
 function getDoctorVisits() {
-  try { return JSON.parse(localStorage.getItem(DOCTORS_KEY)) || []; }
+  try { return JSON.parse(store.getItem(DOCTORS_KEY)) || []; }
   catch { return []; }
 }
 
 function setDoctorVisits(visits) {
-  localStorage.setItem(DOCTORS_KEY, JSON.stringify(visits));
+  store.setItem(DOCTORS_KEY, JSON.stringify(visits));
   autoSaveToFile();
 }
 
 function getYearRecords() {
-  try { return JSON.parse(localStorage.getItem(YEAR_RECORDS_KEY)) || []; }
+  try { return JSON.parse(store.getItem(YEAR_RECORDS_KEY)) || []; }
   catch { return []; }
 }
 
 function setYearRecords(records) {
-  localStorage.setItem(YEAR_RECORDS_KEY, JSON.stringify(records));
+  store.setItem(YEAR_RECORDS_KEY, JSON.stringify(records));
   autoSaveToFile();
 }
 
 function getHeight() {
-  const v = localStorage.getItem(HEIGHT_KEY);
+  const v = store.getItem(HEIGHT_KEY);
   return v !== null ? parseFloat(v) : null;
 }
 
 function setHeight(inches) {
-  localStorage.setItem(HEIGHT_KEY, inches);
+  store.setItem(HEIGHT_KEY, inches);
   autoSaveToFile();
 }
 
 function getMilestones() {
-  try { return JSON.parse(localStorage.getItem(MILESTONES_KEY)) || []; }
+  try { return JSON.parse(store.getItem(MILESTONES_KEY)) || []; }
   catch { return []; }
 }
 
 function setMilestones(milestones) {
-  localStorage.setItem(MILESTONES_KEY, JSON.stringify(milestones));
+  store.setItem(MILESTONES_KEY, JSON.stringify(milestones));
   autoSaveToFile();
 }
 
 function getGoal() {
-  const stored = localStorage.getItem(GOAL_KEY);
+  const stored = store.getItem(GOAL_KEY);
   return stored ? parseFloat(stored) : null;
 }
 
 function setGoal(v) {
-  localStorage.setItem(GOAL_KEY, v);
+  store.setItem(GOAL_KEY, v);
   autoSaveToFile();
 }
 
 function clearGoalStorage() {
-  localStorage.removeItem(GOAL_KEY);
+  store.removeItem(GOAL_KEY);
   autoSaveToFile();
 }
 
@@ -671,36 +701,36 @@ function getAllData() {
 
 function loadAllData(data) {
   if (data.entries && Array.isArray(data.entries)) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data.entries));
+    store.setItem(STORAGE_KEY, JSON.stringify(data.entries));
   }
   if (data.goal !== undefined && data.goal !== null) {
-    localStorage.setItem(GOAL_KEY, data.goal);
+    store.setItem(GOAL_KEY, data.goal);
   } else {
-    localStorage.removeItem(GOAL_KEY);
+    store.removeItem(GOAL_KEY);
   }
   if (Array.isArray(data.doctorVisits)) {
-    localStorage.setItem(DOCTORS_KEY, JSON.stringify(data.doctorVisits));
+    store.setItem(DOCTORS_KEY, JSON.stringify(data.doctorVisits));
   } else {
-    localStorage.removeItem(DOCTORS_KEY);
+    store.removeItem(DOCTORS_KEY);
   }
   if (Array.isArray(data.yearRecords)) {
-    localStorage.setItem(YEAR_RECORDS_KEY, JSON.stringify(data.yearRecords));
+    store.setItem(YEAR_RECORDS_KEY, JSON.stringify(data.yearRecords));
   } else {
-    localStorage.removeItem(YEAR_RECORDS_KEY);
+    store.removeItem(YEAR_RECORDS_KEY);
   }
   if (Array.isArray(data.milestones)) {
-    localStorage.setItem(MILESTONES_KEY, JSON.stringify(data.milestones));
+    store.setItem(MILESTONES_KEY, JSON.stringify(data.milestones));
   } else {
-    localStorage.removeItem(MILESTONES_KEY);
+    store.removeItem(MILESTONES_KEY);
   }
   if (data.height !== undefined && data.height !== null) {
-    localStorage.setItem(HEIGHT_KEY, data.height);
+    store.setItem(HEIGHT_KEY, data.height);
   } else {
-    localStorage.removeItem(HEIGHT_KEY);
+    store.removeItem(HEIGHT_KEY);
   }
 }
 async function autoSaveToFile() {
-  if (!fileHandle) return;
+  if (READ_ONLY || !fileHandle) return;
   try {
     const writable = await fileHandle.createWritable();
     await writable.write(JSON.stringify(getAllData(), null, 2));
@@ -1149,7 +1179,7 @@ function renderMilestones() {
       <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
         <label style="font-size:0.8rem;color:#94a3b8;white-space:nowrap">Date to Complete:</label>
         <input type="date" value="${m.due || ''}" style="background:#1e293b;border:1px solid #334155;border-radius:6px;color:#e2e8f0;padding:3px 7px;font-size:0.8rem"
-          onchange="updateMilestoneDue(${m.id}, this.value)">
+          onchange="updateMilestoneDue(${m.id}, this.value)" ${READ_ONLY ? 'disabled' : ''}>
       </div>
     </div>`;
   }).join('');
@@ -2061,12 +2091,35 @@ function renderAll() {
   renderAverages();
 }
 
+async function loadReadOnlyData() {
+  const status = document.getElementById('ro-status');
+  const updated = document.getElementById('ro-updated');
+  try {
+    const res = await fetch('data.php', { credentials: 'same-origin', cache: 'no-store' });
+    if (res.status === 401) { location.href = 'index.php'; return; }
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    loadAllData(data);
+    renderAll();
+    status.innerHTML = '<span class="dot dot-linked"></span> Read-only view';
+    updated.textContent = data.savedAt ? 'Data last saved: ' + new Date(data.savedAt).toLocaleString() : '';
+  } catch (err) {
+    status.innerHTML = '<span class="dot dot-unlinked"></span> Could not load data';
+    updated.textContent = String(err && err.message ? err.message : err);
+  }
+}
+
 // ── Init ──
 document.getElementById('entry-date').value = new Date().toISOString().split('T')[0];
 document.getElementById('doctor-date').value = new Date().toISOString().split('T')[0];
 renderAll();
-updateStorageStatus(false);
-restoreDirHandle();</script>
+if (READ_ONLY) {
+  document.body.classList.add('readonly');
+  loadReadOnlyData();
+} else {
+  updateStorageStatus(false);
+  restoreDirHandle();
+}</script>
 </body>
 </html>
 
