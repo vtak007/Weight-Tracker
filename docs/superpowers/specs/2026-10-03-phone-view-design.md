@@ -1,6 +1,29 @@
 # Weight Tracker — iPhone View-Only Access (Design)
 
-Date: 2026-10-03 · Branch: `add-phone-view` · Status: approved to plan (host facts verified)
+Date: 2026-10-03 · Branch: `add-phone-view` · Status: built and deployed (see "As built" below)
+
+## As built (differences from this design)
+
+The sections below are the original design. Where they differ, this list wins.
+
+1. **Read-only trigger:** read-only mode keys on `http:`/`https:` only (not on a missing File System
+   Access API). This keeps the `localStorage` fallback for `file://` in other browsers.
+2. **Login token, not PHP sessions:** a signed token cookie (HMAC; the secret is in `auth-config.php`,
+   ~30-day lifetime, `HttpOnly`, `SameSite=Strict`). Changing the password regenerates the secret and signs
+   everyone out. Lockout: five wrong attempts, 10 minutes, state kept in `weight-private/`.
+3. **Upload method:** the WinSCP .NET assembly with a DPAPI-encrypted credential file and a pinned TLS
+   fingerprint (the saved WinSCP site stores no password and `WinSCP.com` cannot answer a prompt in batch
+   mode). There is no `upload.ini`. Runs under Windows PowerShell 5.1 only. Uploads go to `*.part`, then rename.
+4. **Secrets location:** `auth-config.php` (source) and the FTP credential file live in
+   `%USERPROFILE%\weight-tracker-secrets\`, outside Dropbox and the repo.
+5. **Script location:** the scripts are versioned in the repo under `deploy/` (not in `PowershellScripts`);
+   the scheduled task `Upload Weight Tracker JSON to NFO` points at `deploy\upload-data.ps1`.
+6. **Remote folder:** `deploy\deploy-web.ps1` creates the remote `weight/` folder itself and refuses to
+   run from an uncommitted tree.
+7. **HTTPS enforced:** added after the final review — `.htaccess` redirects `http://` to `https://`
+   (the original design only said "HTTPS only").
+8. **Served file name:** the app is deployed as `app.html`, blocked from direct access by `.htaccess` and
+   served by `index.php` after login.
 
 ## Goal
 
@@ -112,12 +135,13 @@ No test suite; verify manually, deploying only from committed state (feature bra
 - `/usr/www/titan7/weight-private/` exists, is readable and writable by PHP, can read a file
   uploaded over FTP, and is not reachable by URL (404).
 
-## Open items to resolve during implementation
+## Open items (resolved)
 
-- Phone layout of the existing tabs (only one `@media (max-width: 600px)` block exists today).
-- Whether a local PHP/bcrypt tool is available for the password helper (no local `php` binary;
-  likely a small Python script using the `bcrypt` package, emitting a PHP-compatible `$2y$` hash).
+- Phone layout of the existing tabs: tested on an iPhone; the chart range buttons were changed to wrap
+  on narrow screens.
+- Password helper: a Python script, `deploy/make-auth-config.py`, writes a PHP-compatible bcrypt hash.
 
-## Docs (after tested sign-off only)
+## Docs
 
-Update `README.md`, `CLAUDE.md` (Key Files + deploy notes), and `Workspace Map.md`.
+`README.md`, `CLAUDE.md` (Key Files + deploy notes) and `Workspace Map.md` were updated after tested
+sign-off.
