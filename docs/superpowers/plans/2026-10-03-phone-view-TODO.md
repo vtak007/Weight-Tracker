@@ -12,7 +12,7 @@ Plan: `docs/superpowers/plans/2026-10-03-phone-view.md` (this file overrides it 
   run with local PHP); upload scripts `deploy/*.ps1`.
 - **Nothing is deployed yet.** Nothing has been uploaded to NFO except what already existed.
 - NFO FTP login works over explicit TLS (port 21) with the pinned certificate. Credentials are saved
-  (encrypted) in `%USERPROFILE%\weight-tracker-secrets\nfo-ftp-creds.xml` (10-character password verified).
+  (encrypted) in `%USERPROFILE%\weight-tracker-secrets\nfo-ftp-creds.xml`.
 - NFO layout confirmed: `/` has `public/` and `weight-private/` (empty); web root is `/public/FMJfiles/`.
   Probe files are already gone.
 
@@ -71,13 +71,13 @@ Plan: `docs/superpowers/plans/2026-10-03-phone-view.md` (this file overrides it 
 
 - WinSCP's .NET assembly works under **Windows PowerShell 5.1 only**, not PowerShell 7. The scheduled task uses 5.1.
 - Hidden-prompt pasting into PowerShell produced a 66-character password once. Use
-  `deploy\save-ftp-creds.ps1 -ShowTyping`; it prints the saved length (should be 10).
+  `deploy\save-ftp-creds.ps1 -ShowTyping`; it prints the saved length.
 - NFO web FTP is `hosted10.nfoservers.com` (WinSCP site "FMJ Redirect Server", user `titan7`); the pinned
   certificate is self-signed and expires 2028-11-05. If NFO rotates it, update `$NfoFingerprint` in `deploy/nfo-ftp.ps1`.
 - The Live Scores `scores.php` deploy uses this same FTP account.
 - Local PHP for tests is a throwaway at `C:\Users\Perdi\AppData\Local\Temp\wt-php\php.exe`
   (run `PHP_BIN=… bash deploy/tests/test-server.sh`). Delete the folder when done. The harness here blocks
   `rm -rf` and `curl | python`, so download first, then parse.
-- Optional: if you want the NFO FTP password rotated (it was typed at an unresponsive prompt earlier), do it
+- Optional: if you want the NFO FTP password rotated, do it
   in the NFO panel, re-run `save-ftp-creds.ps1 -ShowTyping`, and update WinSCP and the Live Scores deploy.
 - `weight-tracker-data_2026 - Copy.json` is still untracked in the repo; decide whether to delete or ignore it.

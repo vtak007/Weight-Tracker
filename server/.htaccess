@@ -1,4 +1,12 @@
 Options -Indexes
+
+# Plain http must never reach the login form: redirect to https.
+# The X-Forwarded-Proto test avoids a redirect loop if TLS ends at a proxy.
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 <FilesMatch "^(lib\.php|app\.html)$">
   Require all denied
 </FilesMatch>

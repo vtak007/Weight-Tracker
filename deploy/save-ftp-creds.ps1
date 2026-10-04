@@ -23,4 +23,4 @@ if ($pw.Length -eq 0) { throw 'No password entered' }
 $cred = New-Object System.Management.Automation.PSCredential($user, $pw)
 $cred | Export-Clixml -Path (Join-Path $dir 'nfo-ftp-creds.xml')
 Write-Host "Saved to $dir\nfo-ftp-creds.xml (readable only by your Windows account on this PC)"
-Write-Host "Password length saved: $($pw.Length) characters (your FTP password should be 10)"
+Write-Host "Password length saved: $($pw.Length) characters"
