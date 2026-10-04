@@ -30,6 +30,19 @@ Use **Export JSON** on the Export/Import tab as a backup at any time.
 
 ---
 
+## Phone view (read-only)
+
+A read-only copy of the app is hosted on NFO web hosting so you can check your data from a phone.
+
+- **URL:** https://fmj.fullmetaljacket.site.nfoservers.com/weight/ (plain `http://` redirects to `https://`)
+- **Login:** a single password. Five wrong attempts lock that client out for 10 minutes. Use **Sign out** to end the session; otherwise the login lasts 30 days.
+- **What you see:** every view tab. Add Entry, Export/Import and Edit/Delete are hidden, and the header shows "Read-only view" and when the data was last saved.
+- **Data freshness:** a scheduled task (`Upload Weight Tracker JSON to NFO`, daily 10:00) uploads the data file. The phone shows the last upload, not live PC edits.
+- **Change the password:** run `python deploy\make-auth-config.py`, then upload the new `auth-config.php` to `/weight-private/` on NFO. This signs out every device.
+- **Redeploy the site:** commit, then run `deploy\deploy-web.ps1` in Windows PowerShell 5.1 (not PowerShell 7).
+
+---
+
 ## Tabs
 
 ### Log Entry
@@ -119,6 +132,8 @@ Enter a current weight, a projected daily loss rate, and a target date. The app 
 |---|---|
 | `weight-tracker.html` | Main app — open this in your browser |
 | `weight-tracker-data_2026.json` | Live data file for 2026 |
+| `server/` | PHP login gate and data endpoint for the phone site |
+| `deploy/` | Upload/deploy scripts, password helper and their tests |
 | `Blank Weight-Tracker Page.png` | Screenshot of the app with no data |
 
 ## Backup
@@ -128,4 +143,4 @@ The whole project folder is copied daily (06:20) to Google Drive (Weight Tracker
 ## Requirements
 
 - Any modern browser with File System Access API support (Chrome 86+, Edge 86+)
-- No installation, no server, no build step
+- PC app: no installation, no server, no build step. The phone view needs the NFO-hosted gate in `server/`.

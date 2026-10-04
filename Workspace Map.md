@@ -4,7 +4,6 @@ type: workspace-map
 project: Weight Tracker
 path: D:/Dropbox/Computing1/BatchFiles_Scripts/Claude Projects/Weight Tracker
 repo: vtak007/Weight-Tracker (private)
-updated: 2026-10-03
 tags: [workspace-map, weight-tracker, html-app, personal-health]
 ---
 
@@ -12,44 +11,24 @@ tags: [workspace-map, weight-tracker, html-app, personal-health]
 
 > [!NOTE]
 > **What this is**
-> A **single-file** HTML/JS weight & food tracking app. No build step, no server, no dependencies.
-> Open `weight-tracker.html` in Chrome/Edge and it links directly to a local `.json` data file
-> via the **File System Access API**.
+> A **single-file** HTML/JS weight & food tracking app. No build step, no dependencies.
+> On the PC, open `weight-tracker.html` in Chrome/Edge; it links to a local `.json` data file via the
+> **File System Access API**. A read-only copy is served to a phone from NFO web hosting behind a password.
 
----
-
-## 📁 File Inventory
-
-| File | Size | Role | Tracked? |
-|---|---:|---|---|
-| `weight-tracker.html` | 82 KB | **The app.** HTML + CSS + JS, all inline (2066 lines) | ✅ |
-| `weight-tracker-data_2026.json` | 84 KB | **Live data** for 2026 — real personal health data | ✅ |
-| `weight-tracker - Copy.html` | 76 KB | Backup snapshot of the app (May 19, stale) | ✅ |
-| `Readme.md` | 5.5 KB | User-facing docs — every tab & feature described | ✅ |
-| `CLAUDE.md` | 865 B | Agent instructions + key-files table | ✅ |
-| `MEMORY.md` | 431 B | Session memory: root causes, conventions, change log | ✅ |
-| `Blank Weight-Tracker Page.png` | 18 KB | Screenshot of the empty app | ✅ |
-| `.gitignore` | 145 B | OS junk, `*.tmp`, Dropbox conflicted copies | ✅ |
+Files and what they are: see the **Key Files** table in `CLAUDE.md`. Backup (rclone to Google Drive):
+see `CLAUDE.md`. Feature docs: `README.md`.
 
 > [!WARNING]
-> **Data is real, not sample**
-> `weight-tracker-data_2026.json` contains actual personal health records and **is committed** to the
-> private repo. Treat it as sensitive — never publish, never move to a public remote.
+> `weight-tracker-data_2026.json` is **real personal health data**, committed to the private repo.
+> Never publish it or move it to a public remote.
 
 ---
 
 ## 🧩 App Anatomy — `weight-tracker.html`
 
-```
-~1–6      <head>
-~7–261    <style>     all CSS
-~262–561  <body>      markup + 8 tab panels
-~562–end  <script>    all JS
-```
-
-Ranges are approximate and drift as the file grows — they're here for a sense of proportion, not
-for navigation. `restoreDirHandle()` is the boot entry point: it's the last statement in the
-script, called on load.
+One file: `<head>`, `<style>` (all CSS), `<body>` (markup + 8 tab panels), `<script>` (all JS).
+`restoreDirHandle()` is the boot entry point (PC mode); `loadReadOnlyData()` is the boot path in phone mode.
+Both are called at the end of the script.
 
 ### Tab panels (DOM ids)
 
@@ -62,7 +41,7 @@ script, called on load.
 | Yearly Records | `tab-records` | `renderYearRecords` · `saveYearRecord` |
 | Projection | `tab-projection` | `calculateProjection` · `renderProjectionDefaults` |
 | Averages | `tab-averages` | `renderDailyRates` · `renderAverages` · `renderAveragesChart` |
-| Export / Import | `tab-data` | `exportJSON` · `exportCSV` · `importJSON` |
+| Export / Import | `tab-data` | `exportJSON` · `exportCSV` · `importJSON` (hidden in read-only mode) |
 
 Switching is handled by `showTab(name, btn)`; `renderAll()` is the global refresh.
 
@@ -72,23 +51,49 @@ Switching is handled by `showTab(name, btn)`; `renderAll()` is the global refres
 flowchart TD
   A["UI — 8 tab panels<br/>showTab / renderAll"] --> B["Render layer<br/>renderChart, renderHistory,<br/>renderBMI, renderAverages…"]
   B --> C["Accessor layer<br/>getEntries/setEntries<br/>getGoal, getMilestones,<br/>getDoctorVisits, getYearRecords,<br/>getHeight"]
-  C --> D["localStorage<br/>(always)"]
-  C --> E["autoSaveToFile()"]
+  C --> D["store<br/>localStorage (PC)<br/>in-memory Map (phone)"]
+  C --> E["autoSaveToFile()<br/>PC only"]
   E --> F["Linked .json file<br/>File System Access API"]
   G["IndexedDB<br/>openHandleDB / saveDirHandle<br/>loadDirHandle / restoreDirHandle"] --> F
 ```
 
-### Persistence — the tricky part
+### Persistence — the tricky part (PC mode)
 
 | Piece | Function(s) | Note |
 |---|---|---|
 | Directory handle store | `openHandleDB`, `saveDirHandle`, `loadDirHandle` | Kept in **IndexedDB** so the folder survives reloads |
-| Boot restore | `restoreDirHandle()` | Runs on load; last line of the script. If the saved directory handle still has granted permission (`queryPermission`, no prompt), it silently re-finds the single `.json` file and calls `loadFromHandle(handle, {silent:true})` to re-link without user action |
+| Boot restore | `restoreDirHandle()` | If the saved handle still has permission (`queryPermission`, no prompt), it silently re-finds the single `.json` file and calls `loadFromHandle(handle, {silent:true})` |
 | Folder pick | `pickDataDirectory()` | One-time **Browse**; choose *Every Visit* at the Chrome prompt |
 | Open / create | `openDataFile`, `createDataFile`, `loadFromHandle` | File picker UI: `showFilePicker` / `selectFileFromPicker` |
-| Auto-save | `autoSaveToFile()` | Fires on every mutation |
+| Auto-save | `autoSaveToFile()` | Fires on every mutation; skipped when `READ_ONLY` |
 | Status dot | `updateStorageStatus(linked, errorMsg)` | 🟢 linked to file · 🟡 localStorage only |
 | Whole-state I/O | `getAllData()` / `loadAllData(data)` | The JSON serialization boundary |
+
+### Read-only phone mode
+
+| Piece | Symbol | Note |
+|---|---|---|
+| Mode switch | `READ_ONLY` | True only when served over `http:`/`https:`; `file://` on the PC stays normal |
+| Storage | `store` | In-memory Map when `READ_ONLY`, `localStorage` otherwise — all reads/writes go through it |
+| Data load | `loadReadOnlyData()` | Fetches `data.php`; 401 → login page; bad/`null`/non-OK body → "Could not load data" |
+| Hiding write UI | `.ro-hide` / `.ro-only` CSS classes, `body.readonly` | Add Entry, Export/Import, Edit/Delete hidden; milestone due-date input disabled |
+
+---
+
+## 🌐 Phone site (NFO web hosting)
+
+| Piece | Where | Note |
+|---|---|---|
+| PHP gate | `server/` → `/public/FMJfiles/weight/` | `index.php` (login/logout, serves `app.html`), `data.php` (authenticated JSON), `lib.php` (token, cookie, rate limit), `.htaccess` (https redirect, blocks `lib.php`/`app.html`), `robots.txt` |
+| App copy | `weight-tracker.html` → `app.html` | Same file as the PC app; deployed under a different name |
+| Private data | `/weight-private/` on NFO (outside web root) | `weight-tracker-data_*.json` and `auth-config.php` (bcrypt hash + token secret) |
+| Deploy | `deploy/deploy-web.ps1` | Refuses to run from an uncommitted tree; Windows PowerShell 5.1 only |
+| Daily data upload | `deploy/upload-data.ps1`, task `Upload Weight Tracker JSON to NFO` (10:00) | Uploads to `*.part` then renames; log in `Documents\upload-weighttracker.log` |
+| Credentials | `%USERPROFILE%\weight-tracker-secrets\` | FTP creds (`save-ftp-creds.ps1`) and `auth-config.php` source — outside the repo and Dropbox |
+| Password change | `deploy/make-auth-config.py` | Writes a new `auth-config.php`; upload it to `/weight-private/`. Signs everyone out |
+
+Tests: `deploy/tests/lib-test.php`, `deploy/tests/test-server.sh` (need a local PHP), `deploy/test_make_auth_config.py`.
+Design: `docs/superpowers/specs/2026-10-03-phone-view-design.md`.
 
 ---
 
@@ -96,13 +101,13 @@ flowchart TD
 
 ```jsonc
 {
-  "entries": [            // 191 records
+  "entries": [            // N records
     { "date": "2026-02-01", "weight": 259.7, "foods": [], "notes": "" }
   ],
   "goal": 208,            // target weight (lbs)
-  "doctorVisits": [ /* 18 */ ],   // date, doctor, officeWeight, homeWeight, notes
-  "yearRecords":  [ /* 16 */ ],   // year, low, high
-  "milestones":   [ /*  1 */ ],   // id, weight, dueDate
+  "doctorVisits": [ ],    // date, doctor, officeWeight, homeWeight, notes
+  "yearRecords":  [ ],    // year, low, high
+  "milestones":   [ ],    // id, weight, dueDate
   "height": 70,           // inches — drives BMI
   "savedAt": "2026-08-11T16:23:41.768Z"
 }
@@ -113,49 +118,27 @@ Doctor visits are held **newest-first** — code that walks them relies on that 
 
 ---
 
-## ☁️ Backup (external to repo)
-
-| Piece | Location |
-|---|---|
-| Scheduled task | `Rclone BackupWeight Tracker JSON to gdrive` — daily 06:20, Task Scheduler root folder |
-| Script | `D:/Dropbox/Computing1/BatchFiles_Scripts/PowershellScripts/rclone-copy_WeightTracker.ps1` |
-| Source → dest | Dropbox remote `Computing1/BatchFiles_Scripts/Claude Projects/Weight Tracker` → `Gdrive:/Weight Tracker` (excludes `.git/`, `.remember/`) |
-| Log | `C:/Users/Perdi/Documents/rclone-copy_WeightTracker.log` |
-
----
-
 ## 🌿 Git
 
-**Remote:** `vtak007/Weight-Tracker` — private. Normally a single `main` branch.
+**Remote:** `vtak007/Weight-Tracker` — private. **Workflow:** feature branch → verify in the browser →
+fast-forward merge to `main` → delete the branch. No PRs, no CI. The live data file is committed in the
+same repo, so most commits are pure data updates.
 
-**Workflow:** feature branch → verify in the browser → fast-forward merge to `main` → delete the
-branch. No PRs, no CI.
+Start reading code history from these, then use `git log` (authoritative, always current):
 
-> [!NOTE]
-> **Most of the history is data churn**
-> `weight-tracker-data_2026.json` changes on nearly every use, so the majority of commits are pure
-> data updates with no code in them. When reading history for *code*, start from these:
->
-> | Commit | Change |
-> |---|---|
-> | `7e38253` | "Current vs. Home" pill moved to each doctor's latest visit (`renderDoctorVisits`) |
-> | `cfce9d6` | Milestone due dates; data-directory picker with IndexedDB persistence |
-> | `0274cfe` | Initial commit — the whole app |
-
-> [!TIP]
-> **This section deliberately records no branch tips, commit counts or working-tree state.**
-> That churns on every commit and goes stale immediately — `git log --oneline -10` and
-> `git status` are authoritative and always current. Only durable facts belong here.
+| Commit | Change |
+|---|---|
+| `7e38253` | "Current vs. Home" pill moved to each doctor's latest visit (`renderDoctorVisits`) |
+| `cfce9d6` | Milestone due dates; data-directory picker with IndexedDB persistence |
+| `0274cfe` | Initial commit — the whole app |
 
 ---
 
 ## 🛠️ Working Notes
 
-- **No build, no test suite.** Verify by opening the file in a browser.
-- **Requires** Chrome/Edge 86+ (File System Access API). Firefox/Safari fall back to `localStorage`.
-- **Editing the app** means editing one 2000-line file — CSS, markup, and JS all live in it.
-- `weight-tracker - Copy.html` is a **manual** backup and is already months behind; git is the real safety net.
-- Project conventions & confirmed root causes belong in `MEMORY.md`; feature docs in `Readme.md`.
+- **No build, no test suite for the app.** Verify by opening the file in a browser (the phone-site gate has PHP/Python tests, see above).
+- **Editing the app** means editing one large file — CSS, markup and JS all live in it.
+- `MEMORY.md` (project root) holds confirmed root causes and a change log.
 
 ### Common jumping-off points
 
@@ -166,14 +149,7 @@ branch. No PRs, no CI.
 | Adjust food matching | `analyzeFoods()`, `parseFoods()` |
 | Change what's saved | `getAllData()`, `loadAllData()` |
 | Fix a file-linking bug | `restoreDirHandle()` → `openDataFile()` |
+| Change what the phone shows or hides | `READ_ONLY`, `.ro-hide` / `.ro-only`, `loadReadOnlyData()` |
+| Change login, lockout or cookie rules | `server/lib.php`, `server/index.php` |
 
-Every name above is unique within `weight-tracker.html` — search for it rather than scrolling to a
-line number. No line numbers here on purpose; they drift, function names don't.
-
----
-
-## 🔗 Related
-
-- `Readme.md` — full feature documentation per tab
-- `CLAUDE.md` — instructions for agent sessions in this folder
-- `MEMORY.md` — running change log and ruled-out theories
+Search for the name rather than scrolling to a line number — names are unique within `weight-tracker.html`.
