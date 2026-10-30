@@ -822,8 +822,9 @@ function showFilePicker(handles) {
 }
 
 async function selectFileFromPicker(index) {
+  const handle = window._filePickerHandles[index];
   closeFilePicker();
-  await loadFromHandle(window._filePickerHandles[index]);
+  await loadFromHandle(handle);
 }
 
 function closeFilePicker() {
