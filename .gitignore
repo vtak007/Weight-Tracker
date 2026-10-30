@@ -13,3 +13,7 @@ desktop.ini
 # Secrets (live outside the repo; ignored here as a safeguard)
 auth-config.php
 __pycache__/
+
+# Local data backups (personal health data)
+data-backups/
+Backups/
