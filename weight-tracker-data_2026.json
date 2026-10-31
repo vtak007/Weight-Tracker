@@ -6798,6 +6798,29 @@
         }
       ],
       "notes": ""
+    },
+    {
+      "date": "2026-10-30",
+      "weight": 246.5,
+      "foods": [
+        {
+          "name": "breakfast",
+          "qty": 1
+        },
+        {
+          "name": "popcorn",
+          "qty": 1
+        },
+        {
+          "name": "chicken salad sandwich",
+          "qty": 1
+        },
+        {
+          "name": "oz seafood cornbread",
+          "qty": 12
+        }
+      ],
+      "notes": ""
     }
   ],
   "goal": 205,
@@ -7029,12 +7052,12 @@
   ],
   "milestones": [
     {
-      "id": 1793288253706,
+      "id": 1793380825450,
       "label": "Weekly 11-06-2026",
-      "target": 244.8,
+      "target": 244.5,
       "due": "2026-11-06"
     }
   ],
   "height": 70,
-  "savedAt": "2026-10-30T04:04:50.018Z"
+  "savedAt": "2026-10-30T23:58:31.395Z"
 }
