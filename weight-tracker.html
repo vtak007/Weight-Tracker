@@ -953,7 +953,7 @@ function editEntry(date) {
 }
 
 function cancelEdit() {
-  document.getElementById('entry-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('entry-date').value = localDateStr(new Date());
   document.getElementById('entry-weight').value = '';
   document.getElementById('entry-foods').value = '';
   document.getElementById('entry-notes').value = '';
@@ -1212,7 +1212,7 @@ function renderChart() {
       cutoff = new Date();
       cutoff.setDate(cutoff.getDate() - chartRange);
     }
-    const cutoffStr = cutoff.toISOString().split('T')[0];
+    const cutoffStr = localDateStr(cutoff);
     entries = allEntries.filter(e => e.date >= cutoffStr);
   }
 
@@ -1691,7 +1691,7 @@ function renderProjectionDefaults() {
   if (!dateInput.value) {
     const future = new Date();
     future.setDate(future.getDate() + 30);
-    dateInput.value = future.toISOString().split('T')[0];
+    dateInput.value = localDateStr(future);
   }
 }
 
@@ -1759,7 +1759,7 @@ function renderDailyRates() {
     } else {
       const cutoff = new Date(latestDate);
       cutoff.setDate(cutoff.getDate() - range.days);
-      const cutoffStr = cutoff.toISOString().split('T')[0];
+      const cutoffStr = localDateStr(cutoff);
       const candidates = entries.filter(e => e.date <= cutoffStr);
       if (candidates.length === 0) continue;
       startEntry = candidates[candidates.length - 1];
@@ -1829,7 +1829,7 @@ function renderAveragesChart() {
   if (avgChartRange !== 'all') {
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - avgChartRange);
-    const cutoffStr = cutoff.toISOString().split('T')[0];
+    const cutoffStr = localDateStr(cutoff);
     entries = allEntries.filter(e => e.date >= cutoffStr);
   }
   if (entries.length < 2) {
@@ -2053,6 +2053,12 @@ function importJSON() {
 }
 // ── Helpers ──
 
+// Local calendar date as YYYY-MM-DD. (toISOString() is UTC, which rolls to
+// tomorrow in the evening for US time zones.)
+function localDateStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
 function formatDate(dateStr) {
   if (!dateStr.includes('-')) return dateStr;
   const [y, m, d] = dateStr.split('-');
@@ -2111,8 +2117,8 @@ async function loadReadOnlyData() {
 }
 
 // ── Init ──
-document.getElementById('entry-date').value = new Date().toISOString().split('T')[0];
-document.getElementById('doctor-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('entry-date').value = localDateStr(new Date());
+document.getElementById('doctor-date').value = localDateStr(new Date());
 renderAll();
 if (READ_ONLY) {
   document.body.classList.add('readonly');
