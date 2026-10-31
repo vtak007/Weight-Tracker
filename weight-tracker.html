@@ -1857,7 +1857,7 @@ function renderDailyRates() {
     const totalCls = s.totalChange < 0 ? 'change-neg' : s.totalChange > 0 ? 'change-pos' : 'change-zero';
     const rateCls = s.dailyRate < 0 ? 'change-neg' : s.dailyRate > 0 ? 'change-pos' : 'change-zero';
     return `<div class="avg-row">
-      <span>${s.label} <span style="color:#64748b">(${formatDate(s.startDate)} &rarr; now &middot; ${s.actualDays}d)</span></span>
+      <span>${s.label} <span style="color:#64748b">(${formatDate(s.startDate)} &rarr; ${formatDate(latest.date)} &middot; ${s.actualDays}d)</span></span>
       <span>
         <span class="${totalCls}">${s.totalChange > 0 ? '+' : ''}${s.totalChange.toFixed(1)} lbs total</span>
         &nbsp;&middot;&nbsp;
@@ -1894,7 +1894,8 @@ function renderAveragesChart() {
 
   let entries = allEntries;
   if (avgChartRange !== 'all') {
-    const cutoff = new Date();
+    // Count back from the latest entry (not today), matching the Daily Rate cards above
+    const cutoff = new Date(allEntries[allEntries.length - 1].date + 'T00:00:00');
     cutoff.setDate(cutoff.getDate() - avgChartRange);
     const cutoffStr = localDateStr(cutoff);
     entries = allEntries.filter(e => e.date >= cutoffStr);

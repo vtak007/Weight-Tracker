@@ -111,7 +111,7 @@ Enter a current weight, a projected daily loss rate, and a target date. The app 
 ---
 
 ### Averages
-**Average Daily Rate** — shows average lbs/day change over 7 days, 30 days, 90 days, and all time, with total change and actual day count for each window.
+**Average Daily Rate** — shows average lbs/day change over 7 days, 30 days, 90 days, and all time, with total change and actual day count for each window. Windows count back from your latest entry, and the chart below uses the same windows.
 
 **Weekly & Monthly Averages** — average weight by calendar week and month across your full history.
 
