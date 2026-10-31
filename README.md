@@ -58,7 +58,7 @@ Also contains:
 
 **BMI Tracker** — enter your height once; the app calculates and displays your current BMI with a color-coded gauge (Underweight → Normal → Overweight → Obese), your BMI at goal weight, and how much weight separates you from the Normal range.
 
-**Milestones** — add intermediate weight targets between your starting and goal weight. Each milestone shows a progress bar, remaining lbs, and an editable **Date to Complete** field. The date can be set when adding a milestone or updated at any time directly on the milestone card.
+**Milestones** — add intermediate weight targets between your starting and goal weight. Each milestone shows a progress bar, remaining lbs, and an editable **Date to Complete** field. Progress is measured from your latest weight when the milestone was created (shown as "from … lbs"), not from your first-ever entry. The date can be set when adding a milestone or updated at any time directly on the milestone card.
 
 **Weight Trend Chart** — SVG line chart of daily weights with a 7-day moving average overlay and optional goal line. Filterable to 7 / 30 / 90 days, This Week (Monday–today), This Month (1st–today), or All Time. Hover over a dot for the exact weight and day-over-day change.
 

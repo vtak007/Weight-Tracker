@@ -1110,7 +1110,10 @@ function saveMilestone() {
   const due = document.getElementById('milestone-due').value;
 
   const milestones = getMilestones();
-  milestones.push({ id: Date.now(), label, target, due });
+  const entries = getEntries();
+  // Progress is measured from your latest weight at the time the milestone is created
+  const startWeight = entries.length > 0 ? entries[entries.length - 1].weight : null;
+  milestones.push({ id: Date.now(), label, target, due, startWeight });
   milestones.sort((a, b) => b.target - a.target);
   setMilestones(milestones);
 
@@ -1131,6 +1134,20 @@ function deleteMilestone(id) {
   renderMilestones();
 }
 
+// Starting weight a milestone's progress is measured from. New milestones store
+// it; older ones don't, so use the latest entry on or before the day the
+// milestone was created (its id is the Date.now() creation timestamp).
+function milestoneStartWeight(m, entries) {
+  if (typeof m.startWeight === 'number') return m.startWeight;
+  if (entries.length === 0) return null;
+  if (typeof m.id === 'number' && m.id > 1e12) {
+    const created = localDateStr(new Date(m.id));
+    const before = entries.filter(e => e.date <= created);
+    if (before.length > 0) return before[before.length - 1].weight;
+  }
+  return entries[0].weight;
+}
+
 function renderMilestones() {
   const container = document.getElementById('milestones-list');
   if (!container) return;
@@ -1143,9 +1160,9 @@ function renderMilestones() {
 
   const entries = getEntries();
   const currentWeight = entries.length > 0 ? entries[entries.length - 1].weight : null;
-  const startWeight = entries.length > 0 ? entries[0].weight : null;
 
   container.innerHTML = milestones.map(m => {
+    const startWeight = milestoneStartWeight(m, entries);
     let pct = 0, statusHtml = '', color = '#0284c7';
 
     if (currentWeight === null) {
@@ -1155,11 +1172,12 @@ function renderMilestones() {
       color = '#4ade80';
       statusHtml = '<span class="change-neg" style="font-weight:600">Achieved!</span>';
     } else {
-      const totalToLose = (startWeight || currentWeight) - m.target;
-      const lost = (startWeight || currentWeight) - currentWeight;
+      const base = startWeight !== null ? startWeight : currentWeight;
+      const totalToLose = base - m.target;
+      const lost = base - currentWeight;
       pct = totalToLose > 0 ? Math.min(Math.max((lost / totalToLose) * 100, 0), 100) : 0;
       const remaining = currentWeight - m.target;
-      statusHtml = `<strong>${remaining.toFixed(1)} lbs</strong> to go &middot; ${pct.toFixed(0)}% there`;
+      statusHtml = `<strong>${remaining.toFixed(1)} lbs</strong> to go &middot; ${pct.toFixed(0)}% there <span style="color:#64748b">(from ${base.toFixed(1)} lbs)</span>`;
     }
 
     const labelText = m.label || `${m.target.toFixed(1)} lbs`;
