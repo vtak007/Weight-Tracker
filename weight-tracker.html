@@ -1381,7 +1381,8 @@ function renderHistory() {
   // Pre-compute change relative to chronological order
   const rows = entries.map((entry, idx) => ({
     ...entry,
-    change: idx > 0 ? entry.weight - entries[idx - 1].weight : null
+    change: idx > 0 ? entry.weight - entries[idx - 1].weight : null,
+    gapDays: idx > 0 ? dayNumber(entry.date) - dayNumber(entries[idx - 1].date) : null
   }));
 
   let display;
@@ -1419,6 +1420,7 @@ function renderHistory() {
     if (change !== null) {
       const cls = change < 0 ? 'change-neg' : change > 0 ? 'change-pos' : 'change-zero';
       changeHtml = `<span class="${cls}">${change > 0 ? '+' : ''}${change.toFixed(1)} lbs</span>`;
+      if (entry.gapDays > 1) changeHtml += ` <span style="color:#64748b;font-size:0.8em" title="Compared with the previous entry, ${entry.gapDays} days earlier">(${entry.gapDays} days)</span>`;
     }
     const foodsHtml = entry.foods.map(f => `<span class="food-tag">${f.qty > 1 ? f.qty + 'x ' : ''}${escapeHtml(f.name)}</span>`).join(' ');
     const notesHtml = entry.notes ? `<span class="note-text" title="${escapeHtml(entry.notes)}">${escapeHtml(entry.notes)}</span>` : '<span style="color:#64748b">--</span>';
@@ -1500,8 +1502,11 @@ function analyzeFoods() {
     }
 
     if (isMatch) {
-      const nextDayChange = i < entries.length - 1 ? entries[i + 1].weight - entry.weight : null;
-      matches.push({ ...entry, nextDayChange, matchedFoods: matched });
+      const next = i < entries.length - 1 ? entries[i + 1] : null;
+      const nextDayChange = next ? next.weight - entry.weight : null;
+      // Days until the next entry; only 1-day gaps count toward the average
+      const nextGapDays = next ? dayNumber(next.date) - dayNumber(entry.date) : null;
+      matches.push({ ...entry, nextDayChange, nextGapDays, matchedFoods: matched });
     }
   });
 
@@ -1521,7 +1526,9 @@ function renderAnalyzeResults() {
   const { matches, searchCount } = analyzeData;
   const results = document.getElementById('analyze-results');
 
-  const changesWithValues = matches.filter(m => m.nextDayChange !== null);
+  // Average only true next-day changes; a change across a skipped day isn't comparable
+  const changesWithValues = matches.filter(m => m.nextDayChange !== null && m.nextGapDays === 1);
+  const excludedGaps = matches.filter(m => m.nextDayChange !== null && m.nextGapDays > 1).length;
   const avgChange = changesWithValues.length > 0
     ? changesWithValues.reduce((sum, m) => sum + m.nextDayChange, 0) / changesWithValues.length : null;
 
@@ -1543,7 +1550,7 @@ function renderAnalyzeResults() {
   let html = `<div class="summary-row">
     <div class="summary-stat"><div class="value">${matches.length}</div><div class="label">Days Matched</div></div>
     <div class="summary-stat"><div class="value">${searchCount}</div><div class="label">Foods Required</div></div>
-    ${avgChange !== null ? `<div class="summary-stat"><div class="value ${avgChange < 0 ? 'change-neg' : avgChange > 0 ? 'change-pos' : 'change-zero'}">${avgChange > 0 ? '+' : ''}${avgChange.toFixed(2)} lbs</div><div class="label">Avg Next-Day Change</div></div>` : ''}
+    ${avgChange !== null ? `<div class="summary-stat"><div class="value ${avgChange < 0 ? 'change-neg' : avgChange > 0 ? 'change-pos' : 'change-zero'}">${avgChange > 0 ? '+' : ''}${avgChange.toFixed(2)} lbs</div><div class="label">Avg Next-Day Change${excludedGaps ? `<br><span style="font-size:0.85em">excl. ${excludedGaps} multi-day gap${excludedGaps > 1 ? 's' : ''}</span>` : ''}</div></div>` : ''}
   </div>
   <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
     <span style="color:#94a3b8;font-size:0.85rem;align-self:center;margin-right:4px">Sort:</span>
@@ -1557,6 +1564,7 @@ function renderAnalyzeResults() {
     if (m.nextDayChange !== null) {
       const cls = m.nextDayChange < 0 ? 'change-neg' : m.nextDayChange > 0 ? 'change-pos' : 'change-zero';
       changeHtml = `<span class="${cls}">${m.nextDayChange > 0 ? '+' : ''}${m.nextDayChange.toFixed(1)} lbs</span>`;
+      if (m.nextGapDays > 1) changeHtml += `<div style="color:#64748b;font-size:0.75rem">over ${m.nextGapDays} days &middot; not in avg</div>`;
     }
     const foodsHtml = m.foods.map(f => {
       const highlight = m.matchedFoods.some(mf => foodNameMatches(mf, f.name));

@@ -65,7 +65,7 @@ Also contains:
 ---
 
 ### History
-Full entry table sortable by Date or Daily Change. Each row shows weight, change from the previous day (color-coded green/red), foods, and notes. Edit or delete any entry inline.
+Full entry table sortable by Date or Daily Change. Each row shows weight, change from the previous entry (color-coded green/red; marked "(N days)" when days were skipped in between), foods, and notes. Edit or delete any entry inline.
 
 ---
 
@@ -76,7 +76,7 @@ Search for days where specific foods were eaten and see the next-day weight chan
 - **Exact match mode** — finds days where the food list matches exactly (no extras)
 - **Word matching** — a searched food matches when every word you type appears as a whole word in the logged name ("fairlife" finds "oz fairlife"; "diet coke" does not match "coke"; "corn" does not match "popcorn"). Singular and plural forms count as the same word.
 
-Results show each matching day with foods highlighted, the next-day weight change, and an **average next-day change** across all matches — useful for seeing how certain foods correlate with weight movement.
+Results show each matching day with foods highlighted, the next-day weight change, and an **average next-day change** across all matches (a day followed by a skipped day still shows its change, marked "over N days", but isn't counted in the average) — useful for seeing how certain foods correlate with weight movement.
 
 **Sorting** — results can be reordered with three buttons:
 - **Date (newest)** — default chronological order, newest first
