@@ -1097,7 +1097,7 @@ function renderBMI() {
     <div class="pill-row">
       ${goalBMI ? `<div class="metric-pill">BMI at goal: <strong style="color:${bmiCategory(goalBMI).color}">${goalBMI.toFixed(1)}</strong></div>` : ''}
       <div class="metric-pill">Normal max: <strong>${normalMaxWeight.toFixed(1)} lbs</strong></div>
-      <div class="metric-pill ${toNormal > 0 ? 'change-pos' : 'change-neg'}">To normal: <strong>${toNormal > 0 ? '+' : ''}${toNormal.toFixed(1)} lbs</strong></div>
+      <div class="metric-pill ${changeCls(toNormal, 1)}">To normal: <strong>${fmtSigned(toNormal, 1)} lbs</strong></div>
     </div>`;
 }
 
@@ -1279,7 +1279,7 @@ function renderChart() {
       <div class="label">Current Weight</div>
     </div>
     <div class="summary-stat">
-      <div class="value ${totalChange < 0 ? 'change-neg' : totalChange > 0 ? 'change-pos' : ''}">${totalChange > 0 ? '+' : ''}${totalChange.toFixed(1)}</div>
+      <div class="value ${changeCls(totalChange, 1)}">${fmtSigned(totalChange, 1)}</div>
       <div class="label">Total Change</div>
     </div>
     <div class="summary-stat">
@@ -1339,7 +1339,7 @@ function renderChart() {
   entries.forEach((e, i) => {
     const cx = x(i), cy = y(weights[i]);
     const change = i > 0 ? weights[i] - weights[i - 1] : 0;
-    const changeStr = i > 0 ? `${change > 0 ? '+' : ''}${change.toFixed(1)}` : '--';
+    const changeStr = i > 0 ? `${fmtSigned(change, 1)}` : '--';
     dots += `<circle cx="${cx}" cy="${cy}" r="4" fill="#38bdf8" stroke="#0f172a" stroke-width="2" class="chart-dot">
       <title>${formatDate(e.date)}: ${e.weight} lbs (${changeStr})</title>
     </circle>`;
@@ -1418,8 +1418,8 @@ function renderHistory() {
     const change = entry.change;
     let changeHtml = '<span class="change-zero">--</span>';
     if (change !== null) {
-      const cls = change < 0 ? 'change-neg' : change > 0 ? 'change-pos' : 'change-zero';
-      changeHtml = `<span class="${cls}">${change > 0 ? '+' : ''}${change.toFixed(1)} lbs</span>`;
+      const cls = changeCls(change, 1);
+      changeHtml = `<span class="${cls}">${fmtSigned(change, 1)} lbs</span>`;
       if (entry.gapDays > 1) changeHtml += ` <span style="color:#64748b;font-size:0.8em" title="Compared with the previous entry, ${entry.gapDays} days earlier">(${entry.gapDays} days)</span>`;
     }
     const foodsHtml = entry.foods.map(f => `<span class="food-tag">${f.qty > 1 ? f.qty + 'x ' : ''}${escapeHtml(f.name)}</span>`).join(' ');
@@ -1550,7 +1550,7 @@ function renderAnalyzeResults() {
   let html = `<div class="summary-row">
     <div class="summary-stat"><div class="value">${matches.length}</div><div class="label">Days Matched</div></div>
     <div class="summary-stat"><div class="value">${searchCount}</div><div class="label">Foods Required</div></div>
-    ${avgChange !== null ? `<div class="summary-stat"><div class="value ${avgChange < 0 ? 'change-neg' : avgChange > 0 ? 'change-pos' : 'change-zero'}">${avgChange > 0 ? '+' : ''}${avgChange.toFixed(2)} lbs</div><div class="label">Avg Next-Day Change${excludedGaps ? `<br><span style="font-size:0.85em">excl. ${excludedGaps} multi-day gap${excludedGaps > 1 ? 's' : ''}</span>` : ''}</div></div>` : ''}
+    ${avgChange !== null ? `<div class="summary-stat"><div class="value ${changeCls(avgChange, 2)}">${fmtSigned(avgChange, 2)} lbs</div><div class="label">Avg Next-Day Change${excludedGaps ? `<br><span style="font-size:0.85em">excl. ${excludedGaps} multi-day gap${excludedGaps > 1 ? 's' : ''}</span>` : ''}</div></div>` : ''}
   </div>
   <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
     <span style="color:#94a3b8;font-size:0.85rem;align-self:center;margin-right:4px">Sort:</span>
@@ -1562,8 +1562,8 @@ function renderAnalyzeResults() {
   sorted.forEach(m => {
     let changeHtml = '<span class="change-zero">no next day</span>';
     if (m.nextDayChange !== null) {
-      const cls = m.nextDayChange < 0 ? 'change-neg' : m.nextDayChange > 0 ? 'change-pos' : 'change-zero';
-      changeHtml = `<span class="${cls}">${m.nextDayChange > 0 ? '+' : ''}${m.nextDayChange.toFixed(1)} lbs</span>`;
+      const cls = changeCls(m.nextDayChange, 1);
+      changeHtml = `<span class="${cls}">${fmtSigned(m.nextDayChange, 1)} lbs</span>`;
       if (m.nextGapDays > 1) changeHtml += `<div style="color:#64748b;font-size:0.75rem">over ${m.nextGapDays} days &middot; not in avg</div>`;
     }
     const foodsHtml = m.foods.map(f => {
@@ -1652,13 +1652,13 @@ function renderDoctorVisits() {
 
   container.innerHTML = `<div class="record-grid">${visits.map(visit => {
     const diff = visit.officeWeight - visit.homeWeight;
-    const diffCls = diff < 0 ? 'change-neg' : diff > 0 ? 'change-pos' : 'change-zero';
+    const diffCls = changeCls(diff, 1);
 
     let nowPill = '';
     if (currentWeight !== null && latestPerDoctor.has(visit.date + '|' + visit.doctor.toLowerCase())) {
       const sinceChange = currentWeight - visit.homeWeight;
-      const sinceCls = sinceChange < 0 ? 'change-neg' : sinceChange > 0 ? 'change-pos' : 'change-zero';
-      nowPill = `<div class="metric-pill ${sinceCls}">Current vs. Home: ${sinceChange > 0 ? '+' : ''}${sinceChange.toFixed(1)} lbs</div>`;
+      const sinceCls = changeCls(sinceChange, 1);
+      nowPill = `<div class="metric-pill ${sinceCls}">Current vs. Home: ${fmtSigned(sinceChange, 1)} lbs</div>`;
     }
 
     return `<div class="record-item">
@@ -1675,7 +1675,7 @@ function renderDoctorVisits() {
       <div class="pill-row">
         <div class="metric-pill">Office: ${visit.officeWeight.toFixed(1)} lbs</div>
         <div class="metric-pill">Home: ${visit.homeWeight.toFixed(1)} lbs</div>
-        <div class="metric-pill ${diffCls}">Difference: ${diff > 0 ? '+' : ''}${diff.toFixed(1)} lbs</div>
+        <div class="metric-pill ${diffCls}">Difference: ${fmtSigned(diff, 1)} lbs</div>
         ${nowPill}
       </div>
       ${visit.notes ? `<div class="record-meta" style="margin-top:10px">${escapeHtml(visit.notes)}</div>` : ''}
@@ -1846,22 +1846,22 @@ function renderDailyRates() {
   }
 
   const summaryHtml = stats.map(s => {
-    const cls = s.dailyRate < 0 ? 'change-neg' : s.dailyRate > 0 ? 'change-pos' : 'change-zero';
+    const cls = changeCls(s.dailyRate, 2);
     return `<div class="summary-stat">
-      <div class="value ${cls}">${s.dailyRate > 0 ? '+' : ''}${s.dailyRate.toFixed(2)}</div>
+      <div class="value ${cls}">${fmtSigned(s.dailyRate, 2)}</div>
       <div class="label">${s.label} &middot; lbs/day</div>
     </div>`;
   }).join('');
 
   const detailHtml = stats.map(s => {
-    const totalCls = s.totalChange < 0 ? 'change-neg' : s.totalChange > 0 ? 'change-pos' : 'change-zero';
-    const rateCls = s.dailyRate < 0 ? 'change-neg' : s.dailyRate > 0 ? 'change-pos' : 'change-zero';
+    const totalCls = changeCls(s.totalChange, 1);
+    const rateCls = changeCls(s.dailyRate, 2);
     return `<div class="avg-row">
       <span>${s.label} <span style="color:#64748b">(${formatDate(s.startDate)} &rarr; ${formatDate(latest.date)} &middot; ${s.actualDays}d)</span></span>
       <span>
-        <span class="${totalCls}">${s.totalChange > 0 ? '+' : ''}${s.totalChange.toFixed(1)} lbs total</span>
+        <span class="${totalCls}">${fmtSigned(s.totalChange, 1)} lbs total</span>
         &nbsp;&middot;&nbsp;
-        <span class="${rateCls}">${s.dailyRate > 0 ? '+' : ''}${s.dailyRate.toFixed(2)} lbs/day</span>
+        <span class="${rateCls}">${fmtSigned(s.dailyRate, 2)} lbs/day</span>
       </span>
     </div>`;
   }).join('');
@@ -1951,7 +1951,7 @@ function renderAveragesChart() {
   entries.forEach((e, i) => {
     const cx = x(i), cy = y(weights[i]);
     const change = i > 0 ? weights[i] - weights[i - 1] : 0;
-    const changeStr = i > 0 ? `${change > 0 ? '+' : ''}${change.toFixed(1)}` : '--';
+    const changeStr = i > 0 ? `${fmtSigned(change, 1)}` : '--';
     dots += `<circle cx="${cx}" cy="${cy}" r="4" fill="#38bdf8" stroke="#0f172a" stroke-width="2">
       <title>${formatDate(e.date)}: ${e.weight} lbs (${changeStr})</title>
     </circle>`;
@@ -2018,8 +2018,8 @@ function renderAverages() {
     let changeStr = '--';
     let cls = '';
     if (change !== null) {
-      cls = change < 0 ? 'change-neg' : change > 0 ? 'change-pos' : 'change-zero';
-      changeStr = `<span class="${cls}">${change > 0 ? '+' : ''}${change.toFixed(1)}</span>`;
+      cls = changeCls(change, 1);
+      changeStr = `<span class="${cls}">${fmtSigned(change, 1)}</span>`;
     }
     weekHtml += `<div class="avg-row"><span>${wk} <span style="color:#64748b">(${weeks[wk].length} entries)</span></span><span>${avg.toFixed(1)} lbs ${changeStr}</span></div>`;
   });
@@ -2031,8 +2031,8 @@ function renderAverages() {
     const change = prev !== null ? avg - prev : null;
     let changeStr = '--';
     if (change !== null) {
-      const cls = change < 0 ? 'change-neg' : change > 0 ? 'change-pos' : 'change-zero';
-      changeStr = `<span class="${cls}">${change > 0 ? '+' : ''}${change.toFixed(1)}</span>`;
+      const cls = changeCls(change, 1);
+      changeStr = `<span class="${cls}">${fmtSigned(change, 1)}</span>`;
     }
     const [y, m] = mk.split('-');
     const monthName = new Date(parseInt(y), parseInt(m) - 1).toLocaleString('default', { month: 'long', year: 'numeric' });
@@ -2125,6 +2125,20 @@ function importJSON() {
 // tomorrow in the evening for US time zones.)
 function localDateStr(d) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+// Signed change text ("+1.2", "-0.4", "0.0"). Rounds first, so a tiny value
+// like -0.04 shows as "0.0" rather than "-0.0".
+function fmtSigned(value, decimals = 1) {
+  const r = Number(value.toFixed(decimals));
+  if (r === 0) return (0).toFixed(decimals);
+  return (r > 0 ? '+' : '') + r.toFixed(decimals);
+}
+
+// Gain/loss colour class, decided from the same rounded value that's shown.
+function changeCls(value, decimals = 1) {
+  const r = Number(value.toFixed(decimals));
+  return r < 0 ? 'change-neg' : r > 0 ? 'change-pos' : 'change-zero';
 }
 
 function formatDate(dateStr) {
