@@ -104,17 +104,23 @@ Design: `docs/superpowers/specs/2026-10-03-phone-view-design.md`.
   "entries": [            // N records
     { "date": "2026-02-01", "weight": 259.7, "foods": [], "notes": "" }
   ],
-  "goal": 208,            // target weight (lbs)
+  "goal": 205,            // target weight (lbs); below the first entry = loss goal, above = gain goal
   "doctorVisits": [ ],    // date, doctor, officeWeight, homeWeight, notes
-  "yearRecords":  [ ],    // year, low, high
-  "milestones":   [ ],    // id, weight, dueDate
+  "yearRecords":  [ ],    // year ("2025" string), low, high, notes
+  "milestones":   [ ],    // id (Date.now() at creation), label, target, due, startWeight*
   "height": 70,           // inches — drives BMI
   "savedAt": "2026-08-11T16:23:41.768Z"
 }
 ```
 
 Entries are stored **oldest→newest**; `entries[entries.length - 1]` is the current weight.
-Doctor visits are held **newest-first** — code that walks them relies on that ordering.
+Each entry's `foods` is `[{ name, qty }]`; a leading number becomes `qty` and any unit stays in the name
+("8 oz fairlife" → `qty 8`, `name "oz fairlife"`). This is deliberate — nothing sums quantities.
+Doctor visits are stored **oldest-first** (sorted by date, then doctor); `renderDoctorVisits` reverses them
+to newest-first, and its "latest visit per doctor" logic relies on that reversed order.
+
+\* `startWeight` is written only for milestones created after 2026-10-30. Older milestones don't have it;
+`milestoneStartWeight()` derives it from the latest entry on or before the creation date in `id`.
 
 ---
 
@@ -128,6 +134,7 @@ Start reading code history from these, then use `git log` (authoritative, always
 
 | Commit | Change |
 |---|---|
+| `9717b6e` … `7b43c45` | 2026-10-30 calculation audit fixes — see the MEMORY.md change log |
 | `7e38253` | "Current vs. Home" pill moved to each doctor's latest visit (`renderDoctorVisits`) |
 | `cfce9d6` | Milestone due dates; data-directory picker with IndexedDB persistence |
 | `0274cfe` | Initial commit — the whole app |
@@ -137,6 +144,10 @@ Start reading code history from these, then use `git log` (authoritative, always
 ## 🛠️ Working Notes
 
 - **No build, no test suite for the app.** Verify by opening the file in a browser (the phone-site gate has PHP/Python tests, see above).
+- **Line endings:** files are CRLF on disk and LF in the repo (`core.autocrlf=true` in Windows git). Any other git
+  (e.g. a Linux shell) must run with `-c core.autocrlf=true`, or every file shows as modified.
+- **Dropbox vs. git:** Dropbox syncing `.git` can hold `index`/`refs` open, so git fails with lock errors
+  (`index.lock`, `main.lock`). Quit Dropbox during coding sessions and restart it afterwards.
 - **Editing the app** means editing one large file — CSS, markup and JS all live in it.
 - `MEMORY.md` (project root) holds confirmed root causes and a change log.
 
@@ -144,9 +155,13 @@ Start reading code history from these, then use `git log` (authoritative, always
 
 | I want to… | Go to |
 |---|---|
-| Change how weight is charted | `renderChart()`, `computeMovingAvg()` |
+| Change how weight is charted | `renderChart()`, `computeMovingAvg()`, `movingAvgForRange()` |
 | Touch BMI logic | `renderBMI()`, `bmiCategory()` |
-| Adjust food matching | `analyzeFoods()`, `parseFoods()` |
+| Adjust food matching | `analyzeFoods()`, `foodNameMatches()`, `foodWords()`, `parseFoods()` |
+| Change goal / milestone progress | `targetProgress()`, `milestoneStartWeight()`, `renderGoal()`, `renderMilestones()` |
+| Change daily rates or the projection | `dailyRateStats()`, `renderDailyRates()`, `calculateProjection()` |
+| Work with dates | `localDateStr()` (today as YYYY-MM-DD, local), `dayNumber()` (whole-day arithmetic) — never `toISOString()` for a calendar date |
+| Show a +/− change | `fmtSigned()`, `changeCls()` — round first, then sign and colour |
 | Change what's saved | `getAllData()`, `loadAllData()` |
 | Fix a file-linking bug | `restoreDirHandle()` → `openDataFile()` |
 | Change what the phone shows or hides | `READ_ONLY`, `.ro-hide` / `.ro-only`, `loadReadOnlyData()` |

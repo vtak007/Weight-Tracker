@@ -39,7 +39,7 @@ A read-only copy of the app is hosted on NFO web hosting so you can check your d
 - **What you see:** every view tab. Add Entry, Export/Import and Edit/Delete are hidden, and the header shows "Read-only view" and when the data was last saved.
 - **Data freshness:** a scheduled task (`Upload Weight Tracker JSON to NFO`, daily 10:00) uploads the data file. The phone shows the last upload, not live PC edits.
 - **Change the password:** run `python deploy\make-auth-config.py`, then upload the new `auth-config.php` to `/weight-private/` on NFO. This signs out every device.
-- **Redeploy the site:** commit, then run `deploy\deploy-web.ps1` in Windows PowerShell 5.1 (not PowerShell 7).
+- **Redeploy the site:** commit, then run `deploy\deploy-web.ps1` in Windows PowerShell 5.1 (not PowerShell 7). From a PowerShell 7 prompt in the project folder: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\deploy\deploy-web.ps1`.
 
 ---
 
@@ -47,7 +47,7 @@ A read-only copy of the app is hosted on NFO web hosting so you can check your d
 
 ### Log Entry
 The main daily entry form. Each entry records:
-- **Date**
+- **Date** — defaults to today's local date (an evening entry no longer rolls over to tomorrow)
 - **Weight** (lbs)
 - **Foods eaten** — comma-separated, with optional quantities (e.g. `2 chicken breasts, rice, 6 cookies`)
 - **Notes** — free text (e.g. workout day, felt tired)
@@ -60,7 +60,9 @@ Also contains:
 
 **Milestones** — add intermediate weight targets between your starting and goal weight. Each milestone shows a progress bar, remaining lbs, and an editable **Date to Complete** field. Progress is measured from your latest weight when the milestone was created (shown as "from … lbs"), not from your first-ever entry. The date can be set when adding a milestone or updated at any time directly on the milestone card.
 
-**Weight Trend Chart** — SVG line chart of daily weights with a 7-day moving average overlay and optional goal line. Filterable to 7 / 30 / 90 days, This Week (Monday–today), This Month (1st–today), or All Time. Hover over a dot for the exact weight and day-over-day change.
+**Weight Trend Chart** — SVG line chart of daily weights with a 7-day moving average overlay and optional goal line. The 7-day average covers the last 7 calendar days and is calculated over your full history, so it is accurate from the first day of any filtered range. Filterable to 7 / 30 / 90 days, This Week (Monday–today), This Month (1st–today), or All Time. Hover over a dot for the exact weight and the change from the previous entry.
+
+All signed changes in the app (+/−, green/red) are rounded before the sign and colour are chosen, so a near-zero change shows as a grey `0.0` rather than `+0.0` or `-0.0`.
 
 ---
 
@@ -96,7 +98,7 @@ Log doctor office visits with:
 - Difference between the two readings
 - Notes (e.g. afternoon appointment, shoes on)
 
-The two most recent visits also show "Current vs. Home" — how much your weight has changed since that appointment.
+Each doctor's most recent visit also shows "Current vs. Home" — how much your weight has changed since that appointment.
 
 ---
 
