@@ -54,7 +54,7 @@ The main daily entry form. Each entry records:
 
 Also contains:
 
-**Goal Weight** — set a target weight and see a progress bar showing how far along you are.
+**Goal Weight** — set a target weight and see a progress bar showing how far along you are. The goal can be a loss or a gain: a goal below your starting weight is reached at or below it, and one above your starting weight is reached at or above it (milestones work the same way, using each milestone's own starting weight).
 
 **BMI Tracker** — enter your height once; the app calculates and displays your current BMI with a color-coded gauge (Underweight → Normal → Overweight → Obese), your BMI at goal weight, and how much weight separates you from the Normal range.
 

@@ -996,10 +996,7 @@ function renderGoal() {
 
   const current = entries[entries.length - 1].weight;
   const start = entries[0].weight;
-  const totalToLose = start - goal;
-  const lost = start - current;
-  const remaining = current - goal;
-  const pct = totalToLose > 0 ? Math.min(Math.max((lost / totalToLose) * 100, 0), 100) : 0;
+  const { remaining, pct } = targetProgress(start, current, goal);
   const color = remaining <= 0 ? '#4ade80' : '#0284c7';
 
   container.innerHTML = `
@@ -1017,6 +1014,19 @@ function renderGoal() {
           : `<strong>${remaining.toFixed(1)} lbs</strong> to go &middot; ${pct.toFixed(0)}% of the way there`}
       </div>
     </div>`;
+}
+
+// Progress toward a target weight. The direction comes from where you started:
+// a target below the start is a loss target, one above it is a gain target.
+// remaining = lbs still to lose/gain (0 or less means reached); pct = 0-100.
+function targetProgress(start, current, target) {
+  const losing = target <= start;
+  const remaining = losing ? current - target : target - current;
+  const total = Math.abs(start - target);
+  const done = losing ? start - current : current - start;
+  const pct = remaining <= 0 ? 100
+    : total > 0 ? Math.min(Math.max((done / total) * 100, 0), 100) : 0;
+  return { remaining, pct, losing };
 }
 
 // ── BMI ──
@@ -1165,18 +1175,17 @@ function renderMilestones() {
     const startWeight = milestoneStartWeight(m, entries);
     let pct = 0, statusHtml = '', color = '#0284c7';
 
+    const base = startWeight !== null ? startWeight : currentWeight;
+    const prog = currentWeight === null ? null : targetProgress(base, currentWeight, m.target);
     if (currentWeight === null) {
       statusHtml = '<span style="color:#64748b">No entries logged yet</span>';
-    } else if (currentWeight <= m.target) {
+    } else if (prog.remaining <= 0) {
       pct = 100;
       color = '#4ade80';
       statusHtml = '<span class="change-neg" style="font-weight:600">Achieved!</span>';
     } else {
-      const base = startWeight !== null ? startWeight : currentWeight;
-      const totalToLose = base - m.target;
-      const lost = base - currentWeight;
-      pct = totalToLose > 0 ? Math.min(Math.max((lost / totalToLose) * 100, 0), 100) : 0;
-      const remaining = currentWeight - m.target;
+      pct = prog.pct;
+      const remaining = prog.remaining;
       statusHtml = `<strong>${remaining.toFixed(1)} lbs</strong> to go &middot; ${pct.toFixed(0)}% there <span style="color:#64748b">(from ${base.toFixed(1)} lbs)</span>`;
     }
 
