@@ -74,6 +74,7 @@ Search for days where specific foods were eaten and see the next-day weight chan
 
 - **Contains mode** — finds days where all listed foods appear (extras allowed)
 - **Exact match mode** — finds days where the food list matches exactly (no extras)
+- **Word matching** — a searched food matches when every word you type appears as a whole word in the logged name ("fairlife" finds "oz fairlife"; "diet coke" does not match "coke"; "corn" does not match "popcorn"). Singular and plural forms count as the same word.
 
 Results show each matching day with foods highlighted, the next-day weight change, and an **average next-day change** across all matches — useful for seeing how certain foods correlate with weight movement.
 

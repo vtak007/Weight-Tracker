@@ -436,7 +436,7 @@
     <div class="card">
       <h2>Food Analyzer</h2>
       <p style="color:#94a3b8;font-size:0.85rem;margin-bottom:12px">
-        Enter foods to find days where those foods were eaten and see the next-day weight changes that followed. Leading quantities (e.g. "2 fairlife") are ignored for matching.
+        Enter foods to find days where those foods were eaten and see the next-day weight changes that followed. Leading quantities (e.g. "2 fairlife") are ignored for matching. A food matches when every word you type appears in its name, so "fairlife" finds "oz fairlife" but "diet coke" won't match plain "coke"; singular and plural count the same.
       </p>
       <div style="display:flex;gap:6px;margin-bottom:14px">
         <button class="range-btn active" id="mode-any" onclick="setAnalyzeMode('any')">Contains (extras OK)</button>
@@ -1403,6 +1403,28 @@ function renderHistory() {
 
 // ── Food Analyzer ──
 
+// Split a food name into normalized words: lowercase, split on anything that
+// isn't a letter or digit, and reduce simple plurals so "cookie" = "cookies".
+function foodWords(name) {
+  return name.toLowerCase().split(/[^a-z0-9]+/).filter(w => w).map(w => {
+    if (w.length > 4 && /(ches|shes|xes|sses)$/.test(w)) w = w.slice(0, -2);      // sandwiches
+    else if (w.length > 5 && w.endsWith('oes')) w = w.slice(0, -2);               // potatoes
+    else if (w.length > 3 && w.endsWith('s') && !w.endsWith('ss')) w = w.slice(0, -1); // cookies, fries
+    if (w.length > 3 && w.endsWith('ie')) w = w.slice(0, -2) + 'y';               // cookie/cooky, frie/fry
+    return w;
+  });
+}
+
+// A searched food matches a logged food when every word of the search
+// appears as a whole word in the logged name. "fairlife" finds "oz fairlife",
+// but "diet coke" does not match plain "coke" and "corn" does not match "popcorn".
+function foodNameMatches(search, entryName) {
+  const want = foodWords(search);
+  if (want.length === 0) return false;
+  const have = new Set(foodWords(entryName));
+  return want.every(w => have.has(w));
+}
+
 function setAnalyzeMode(mode) {
   analyzeMode = mode;
   document.getElementById('mode-any').classList.toggle('active', mode === 'any');
@@ -1426,7 +1448,7 @@ function analyzeFoods() {
   const entries = getEntries();
   const matches = [];
 
-  const foodMatches = (sf, ef) => ef.name.includes(sf) || sf.includes(ef.name);
+  const foodMatches = (sf, ef) => foodNameMatches(sf, ef.name);
 
   entries.forEach((entry, i) => {
     const matched = searchFoods.filter(sf => entry.foods.some(ef => foodMatches(sf, ef)));
@@ -1501,7 +1523,7 @@ function renderAnalyzeResults() {
       changeHtml = `<span class="${cls}">${m.nextDayChange > 0 ? '+' : ''}${m.nextDayChange.toFixed(1)} lbs</span>`;
     }
     const foodsHtml = m.foods.map(f => {
-      const highlight = m.matchedFoods.some(mf => f.name.includes(mf) || mf.includes(f.name));
+      const highlight = m.matchedFoods.some(mf => foodNameMatches(mf, f.name));
       return `<span class="food-tag" style="${highlight ? 'background:#0284c7' : ''}">${f.qty > 1 ? f.qty + 'x ' : ''}${escapeHtml(f.name)}</span>`;
     }).join(' ');
 
