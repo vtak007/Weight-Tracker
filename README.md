@@ -106,7 +106,7 @@ Manually log the lowest and highest weight recorded for any year. Useful for yea
 ---
 
 ### Projection
-Enter a current weight, a projected daily loss rate, and a target date. The app calculates the expected weight on that date and the total projected loss over the interval.
+Enter a current weight, a projected daily loss rate, and a target date. The app calculates the expected weight on that date and the total projected loss over the interval. Enter the loss as a positive number (a negative number projects a gain, shown as "Projected gain"). Buttons under the field fill it from your actual 7/30/90-day rates with the sign already converted, since the Averages tab shows losses as negative.
 
 ---
 

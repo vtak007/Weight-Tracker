@@ -538,6 +538,10 @@
           <input type="date" id="projection-date">
         </div>
       </div>
+      <div style="color:#64748b;font-size:0.8rem;margin:-4px 0 8px">
+        Enter a loss as a positive number; a negative number projects a gain. The Averages tab shows losses as negative, so use these instead of copying from there:
+      </div>
+      <div id="projection-rate-buttons" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px"></div>
       <button onclick="calculateProjection()">Calculate</button>
       <div id="projection-result"></div>
     </div>
@@ -1773,6 +1777,13 @@ function renderProjectionDefaults() {
     future.setDate(future.getDate() + 30);
     dateInput.value = localDateStr(future);
   }
+
+  // Quick-fill from your actual rates, with the sign flipped to "loss per day"
+  const btns = document.getElementById('projection-rate-buttons');
+  btns.innerHTML = dailyRateStats(entries).filter(st => st.label !== 'All Time').map(st => {
+    const loss = (-st.dailyRate).toFixed(2);
+    return `<button type="button" class="range-btn" onclick="document.getElementById('projection-loss-per-day').value='${loss}'">Use ${st.label.replace(' Days', '-day')} rate (${loss})</button>`;
+  }).join('');
 }
 
 function calculateProjection() {
@@ -1805,23 +1816,17 @@ function calculateProjection() {
     <div class="big-number">${projectedWeight.toFixed(1)} lbs</div>
     <div class="pill-row">
       <div class="metric-pill">Days: ${days}</div>
-      <div class="metric-pill">Projected loss: ${totalLoss.toFixed(1)} lbs</div>
+      <div class="metric-pill">${totalLoss < 0 ? `Projected gain: +${(-totalLoss).toFixed(1)}` : `Projected loss: ${totalLoss.toFixed(1)}`} lbs</div>
       <div class="metric-pill">Starting weight: ${currentWeight.toFixed(1)} lbs</div>
     </div>
   </div>`;
 }
 // ── Average Daily Rate ──
 
-function renderDailyRates() {
-  const entries = getEntries();
-  const container = document.getElementById('daily-rate-content');
-  if (!container) return;
-
-  if (entries.length < 2) {
-    container.innerHTML = '<div class="empty-state">Need at least 2 entries to calculate daily rates.</div>';
-    return;
-  }
-
+// Average lbs/day change over the last 7/30/90 days and all time, each counted
+// back from the latest entry. Needs at least 2 entries; windows without data are skipped.
+function dailyRateStats(entries) {
+  if (entries.length < 2) return [];
   const latest = entries[entries.length - 1];
   const latestDate = new Date(latest.date + 'T00:00:00');
 
@@ -1853,6 +1858,22 @@ function renderDailyRates() {
     const dailyRate = totalChange / actualDays;
     stats.push({ label: range.label, actualDays, startWeight: startEntry.weight, startDate: startEntry.date, totalChange, dailyRate });
   }
+
+  return stats;
+}
+
+function renderDailyRates() {
+  const entries = getEntries();
+  const container = document.getElementById('daily-rate-content');
+  if (!container) return;
+
+  if (entries.length < 2) {
+    container.innerHTML = '<div class="empty-state">Need at least 2 entries to calculate daily rates.</div>';
+    return;
+  }
+
+  const latest = entries[entries.length - 1];
+  const stats = dailyRateStats(entries);
 
   if (stats.length === 0) {
     container.innerHTML = '<div class="empty-state">Not enough data to calculate rates.</div>';
