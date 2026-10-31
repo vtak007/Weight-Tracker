@@ -56,7 +56,7 @@ Also contains:
 
 **Goal Weight** — set a target weight and see a progress bar showing how far along you are. The goal can be a loss or a gain: a goal below your starting weight is reached at or below it, and one above your starting weight is reached at or above it (milestones work the same way, using each milestone's own starting weight).
 
-**BMI Tracker** — enter your height once; the app calculates and displays your current BMI with a color-coded gauge (Underweight → Normal → Overweight → Obese), your BMI at goal weight, and how much weight separates you from the Normal range.
+**BMI Tracker** — enter your height once; the app calculates and displays your current BMI with a color-coded gauge (Underweight → Normal → Overweight → Obese), your BMI at goal weight, and how much weight separates you from the Normal range. Categories follow the BMI as displayed (rounded to one decimal), so "Normal max" is the heaviest weight that still shows a Normal BMI of 24.9.
 
 **Milestones** — add intermediate weight targets between your starting and goal weight. Each milestone shows a progress bar, remaining lbs, and an editable **Date to Complete** field. Progress is measured from your latest weight when the milestone was created (shown as "from … lbs"), not from your first-ever entry. The date can be set when adding a milestone or updated at any time directly on the milestone card.
 
